@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@uiw/react-md-editor": "4.0.1",
+    "daisyui": "^4.4.19",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"
