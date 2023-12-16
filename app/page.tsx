@@ -17,7 +17,9 @@ export default function Home() {
         영어 <span className="text-primary">아티클</span> 읽자
       </h1>
       <Input setWords={setWords} en={en} setEn={setEn} setKo={setKo} />
-      {words.length > 0 && <Result words={words} en={en} ko={ko} />}
+      {words.length > 0 && (
+        <Result words={words} en={en} ko={ko} setKo={setKo} />
+      )}
     </main>
   );
 }
