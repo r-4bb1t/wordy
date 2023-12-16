@@ -48,7 +48,7 @@ export default function Input({
   const makeResult = useCallback(async () => {
     setLoading(true);
     try {
-      Promise.all([translate(), makeWords()]);
+      await Promise.all([translate(), makeWords()]);
     } catch (e) {
       console.log(e);
     } finally {
@@ -65,7 +65,7 @@ export default function Input({
           onChange={setEn}
           preview="live"
           visibleDragbar={false}
-          height={300}
+          height={400}
           className="w-full text-sm"
         />
       </div>

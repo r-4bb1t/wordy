@@ -12,9 +12,9 @@ export default function Result({
   ko: string;
 }) {
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center gap-8">
       <Words words={words} />
-      <Article en={en} ko={ko} />
+      <Article en={en} ko={ko} words={words.map((w) => w.word)} />
     </div>
   );
 }

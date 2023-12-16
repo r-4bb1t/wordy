@@ -1,4 +1,6 @@
-export const DEFAULT_ARTICLE = `A woman in Australia has been charged with stealing a delivery van packed with 10,000 Krispy Kreme doughnuts.
+export const DEFAULT_ARTICLE = `# Australian woman charged with stealing van carrying 10,000 doughnuts
+
+A woman in Australia has been charged with stealing a delivery van packed with 10,000 Krispy Kreme doughnuts.
 
 The van went missing from a petrol station in a Sydney suburb in the early hours of 29 November.
 

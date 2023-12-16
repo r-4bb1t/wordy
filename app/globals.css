@@ -11,6 +11,9 @@
 }
 
 @layer components {
+  .highlight {
+    @apply underline underline-offset-2 decoration-dotted decoration-primary;
+  }
 }
   
 * {
@@ -23,9 +26,12 @@
 
 .w-md-editor-preview {
   box-shadow: none !important;
-  background-color: rgba(240,242,244);
 }
 
 .wmde-markdown {
   background-color: transparent !important;
+}
+
+.wmde-markdown p {
+  margin-bottom: 8px !important;
 }
