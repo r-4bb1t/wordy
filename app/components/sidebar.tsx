@@ -11,16 +11,14 @@ export default async function Sidebar() {
   const articles = await getData();
 
   return (
-    <aside className="w-96 h-screen bg-white">
+    <aside className="w-96 h-screen bg-white sticky top-0">
       <ul className="w-full p-4">
         {articles.map((article, i) => (
           <li
             className="w-full h-20 border border-primary rounded-xl p-4 mb-4"
             key={i}
           >
-            <div className="text-xl font-bold">
-              {article.contents.split("\n")[0]}
-            </div>
+            <div className="text-xl font-bold">{article.en.split("\n")[0]}</div>
           </li>
         ))}
       </ul>

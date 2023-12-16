@@ -3,22 +3,23 @@
 import { useCallback, useState } from "react";
 
 import MDEditor from "@uiw/react-md-editor";
-import { WordType } from "../types/result";
+import { QuizType, WordType } from "../types/result";
 
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import { DEFAULT_ARTICLE } from "../constants/default";
 
 export default function Input({
   setWords,
   en,
   setEn,
   setKo,
+  setquizzes,
 }: {
   setWords: React.Dispatch<React.SetStateAction<WordType[]>>;
   en: string;
   setEn: React.Dispatch<React.SetStateAction<string>>;
   setKo: React.Dispatch<React.SetStateAction<string>>;
+  setquizzes: React.Dispatch<React.SetStateAction<QuizType[]>>;
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -42,8 +43,10 @@ export default function Input({
       },
       body: JSON.stringify({ article: en }),
     });
-    setWords(await wordsResult.json());
-  }, [en, setWords]);
+    const { words, quizzes } = await wordsResult.json();
+    setWords(words);
+    setquizzes(quizzes);
+  }, [en, setquizzes, setWords]);
 
   const makeResult = useCallback(async () => {
     setLoading(true);
@@ -57,7 +60,7 @@ export default function Input({
   }, [makeWords, translate]);
 
   return (
-    <div className="w-full flex flex-col max-w-5xl items-center gap-8 px-4">
+    <div className="w-full flex flex-col max-w-5xl items-center gap-8">
       <div className="w-full border border-primary rounded-xl overflow-hidden">
         <MDEditor
           value={en}
