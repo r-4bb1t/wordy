@@ -23,7 +23,7 @@ export default function Input({
   const [loading, setLoading] = useState(false);
 
   const translate = useCallback(async () => {
-    const translateResult = await fetch("/api/papago", {
+    const translateResult = await fetch("/api/translate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default function Input({
       body: JSON.stringify({ text: en }),
     });
     const { message } = await translateResult.json();
-    setKo(message.result.translatedText);
+    setKo(message);
   }, [en, setKo]);
 
   const makeWords = useCallback(async () => {

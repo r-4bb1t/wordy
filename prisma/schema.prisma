@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Word {
+  id               String            @id @default(uuid())
+  word             String            @unique
+  meaning          String
+  exampleSentences ExampleSentence[]
+  articles         Article[]
+}
+
+model ExampleSentence {
+  id       String @id @default(uuid())
+  sentence String @unique
+  meaning  String
+  word     Word   @relation(fields: [wordId], references: [id])
+  wordId   String
+}
+
+model Article {
+  id       String @id @default(uuid())
+  contents String
+  Words    Word[]
+}
