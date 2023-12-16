@@ -14,6 +14,5 @@ export async function POST(request: Request) {
     }),
   });
   const json = await response.json();
-  console.log(json);
   return Response.json(json);
 }

@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "SUIT";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+       format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer components {
+}
+  
+* {
+  font-family: "SUIT";
+}
+  
+.w-md-editor {
+  box-shadow: none !important;
+}
+
+.w-md-editor-preview {
+  box-shadow: none !important;
+  background-color: rgba(240,242,244);
+}
+
+.wmde-markdown {
+  background-color: transparent !important;
+}
