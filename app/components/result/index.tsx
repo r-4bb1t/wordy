@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { QuizType, WordType } from "../../types/result";
 import Article from "./article";
-import quizzes from "./quizzes";
+import Quizzes from "./quizzes";
 import Words from "./words";
 import { useRouter } from "next/navigation";
 
@@ -67,7 +67,7 @@ export default function Result({
     <div className="w-full flex flex-col items-center gap-8">
       <Words words={words} />
       <Article en={en} ko={ko} words={words.map((w) => w.word)} setKo={setKo} />
-      <quizzes quizzes={quizzes} />
+      <Quizzes quizzes={quizzes} />
       <button
         className="btn btn-primary"
         onClick={() => handleSave()}

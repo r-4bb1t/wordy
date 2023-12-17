@@ -6,4 +6,5 @@ export interface ArticleType {
   ko: string;
   words: WordType[];
   quizzes: QuizType[];
+  createdAt: string;
 }
