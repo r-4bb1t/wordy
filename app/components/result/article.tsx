@@ -22,7 +22,6 @@ export default function Article({
         preview="edit"
         visibleDragbar={false}
         height={400}
-        previewOptions={[]}
       />
     </div>
   );
