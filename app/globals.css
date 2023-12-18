@@ -10,6 +10,32 @@
   font-style: normal;
 }
 
+:root, [data-theme] {
+  color: black !important;
+}
+
+@media print {
+  body *:not(.printable, .printable *) {
+    display: none;
+  }
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+@media screen {
+  .print-footer {
+    display: none;
+  }
+}
+
+@page  
+{ 
+    size: auto; 
+    margin: 80px 64px 48px 64px;
+} 
+
 @layer components {
   .highlight {
     @apply underline underline-offset-2 decoration-dotted decoration-primary;
@@ -34,4 +60,18 @@
 
 .wmde-markdown p {
   margin-bottom: 8px !important;
+}
+
+.markdown-body p {
+  margin-bottom: 4px !important;
+}
+
+.markdown-body-sm {
+  font-size: 0.75rem !important;
+  margin-top: 32px !important;
+  line-height: 1.25rem !important;
+}
+
+.markdown-body-sm > * {
+  margin-bottom: 2px !important;
 }

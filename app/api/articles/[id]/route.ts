@@ -13,7 +13,7 @@ export async function GET({ params }: { params: { id: string } }) {
   return Response.json({ article });
 }
 
-export async function PUT(
+export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {

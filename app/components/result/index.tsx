@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { QuizType, WordType } from "../../types/result";
 import Article from "./article";
 import Quizzes from "./quizzes";
 import Words from "./words";
 import { useRouter } from "next/navigation";
+import { makePDF } from "@/app/utils/makePDF";
 
 export default function Result({
   id,
@@ -23,15 +24,25 @@ export default function Result({
   setKo: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [loading, setLoading] = useState(false);
+  const page = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
+
+  const handlePDF = useCallback(async () => {
+    makePDF({
+      en,
+      ko,
+      words,
+      quizzes,
+    });
+  }, [en, ko, quizzes, words]);
 
   const handleSave = useCallback(async () => {
     setLoading(true);
     try {
       if (id) {
-        const result = await fetch(`/api/article/${id}`, {
-          method: "PUT",
+        await fetch(`/api/articles/${id}`, {
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
@@ -55,7 +66,7 @@ export default function Result({
             quizzes,
           }),
         });
-        // router.push(`/article/${(await result.json()).id}`);
+        router.push(`/article/${(await result.json()).id}`);
       }
     } catch (e) {
       console.log(e);
@@ -65,16 +76,33 @@ export default function Result({
   }, [en, id, ko, quizzes, router, words]);
   return (
     <div className="w-full flex flex-col items-center gap-8">
-      <Words words={words} />
-      <Article en={en} ko={ko} words={words.map((w) => w.word)} setKo={setKo} />
-      <Quizzes quizzes={quizzes} />
-      <button
-        className="btn btn-primary"
-        onClick={() => handleSave()}
-        disabled={loading}
-      >
-        {loading ? <div className="loading loading-dots" /> : "저장"}
-      </button>
+      <div className="w-full flex flex-col items-center gap-8" ref={page}>
+        <Words words={words} />
+        <Article
+          en={en}
+          ko={ko}
+          words={words.map((w) => w.word)}
+          setKo={setKo}
+        />
+        <Quizzes quizzes={quizzes} />
+      </div>
+      <div className="flex gap-2">
+        <button
+          className="btn btn-primary"
+          onClick={() => handleSave()}
+          disabled={loading}
+        >
+          {loading ? <div className="loading loading-dots" /> : "저장"}
+        </button>
+        <button
+          className="btn btn-primary btn-outline"
+          onClick={() => {
+            handlePDF();
+          }}
+        >
+          PDF 다운로드
+        </button>
+      </div>
     </div>
   );
 }

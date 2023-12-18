@@ -18,7 +18,7 @@ export default function Main({
   const [quizzes, setquizzes] = useState<QuizType[]>(defaultArticle.quizzes);
 
   return (
-    <main className="flex flex-col items-center w-full gap-8 px-4 py-12">
+    <main className="flex flex-col items-center w-full gap-8 px-4 py-12 bg-base-200">
       <Header />
       <Input
         setWords={setWords}

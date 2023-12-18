@@ -10,16 +10,20 @@
   },
   "dependencies": {
     "@prisma/client": "^5.7.0",
+    "@types/showdown": "^2.0.6",
     "@uiw/react-md-editor": "4.0.1",
     "classcat": "^5.0.4",
-    "daisyui": "^4.4.19",
+    "daisyui": "^3.9.4",
     "date-fns": "^2.30.0",
+    "github-markdown-css": "^5.5.0",
     "next": "14.0.4",
     "openai": "^4.22.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
+    "@types/blob-stream": "^0.1.33",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

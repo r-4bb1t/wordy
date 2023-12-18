@@ -26,7 +26,7 @@ export default async function Sidebar() {
                 {article.en.split("\n")[0].replace(/#/g, "")}
               </div>
               <div className="font-light text-gray-500 shrink-0">
-                {formatDistanceToNow(new Date(article.createdAt), {
+                {formatDistanceToNow(new Date(article.createdAt!), {
                   locale: ko,
                   addSuffix: true,
                 })}
