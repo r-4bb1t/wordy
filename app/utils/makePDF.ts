@@ -27,8 +27,11 @@ export const makePDF = async (article: ArticleType) => {
   wordListTitle.innerText = "Words in contents";
 
   const wordlist = document.createElement("ul");
-  wordlist.className = "w-full grid grid-cols-[1fr_4fr]";
+  wordlist.className = "w-full flex flex-col";
   words.forEach((w) => {
+    const word = document.createElement("li");
+    word.className = "grid grid-cols-[200px_1fr] break-inside-avoid";
+
     const wordTitle = document.createElement("div");
     wordTitle.className =
       "font-black text-primary text-xl flex items-center px-4 py-2 border-t-4 border-t-primary !bg-base-200";
@@ -60,8 +63,10 @@ export const makePDF = async (article: ArticleType) => {
     sentenceMeaning.innerText = w.exampleSentence.meaning;
     explanation.appendChild(sentenceMeaning);
 
-    wordlist.appendChild(wordTitle);
-    wordlist.appendChild(explanation);
+    word.appendChild(wordTitle);
+    word.appendChild(explanation);
+
+    wordlist.appendChild(word);
   });
 
   const stitle1 = document.createElement("div");

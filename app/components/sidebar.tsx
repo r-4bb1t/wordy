@@ -14,8 +14,14 @@ export default async function Sidebar() {
   const articles = await getData();
 
   return (
-    <aside className="w-80 h-screen bg-white sticky top-0 border-l border-l-primary">
-      <ul className="w-full p-4 flex flex-col gap-2">
+    <aside className="w-80 h-screen bg-white sticky top-0 border-r border-r-primary p-4">
+      <h2 className="text-lg font-black border-b pb-2 flex justify-between w-full px-1">
+        아티클 목록
+        <Link href={"/"} className="btn btn-ghost btn-sm btn-circle">
+          +
+        </Link>
+      </h2>
+      <ul className="w-full py-2 flex flex-col gap-2">
         {articles.map((article, i) => (
           <li className="w-full" key={i}>
             <Link
