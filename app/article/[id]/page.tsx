@@ -1,5 +1,6 @@
 import Main from "@/app/components/main";
 import { ArticleType } from "@/app/types/articles";
+import { Metadata, ResolvingMetadata } from "next";
 
 const getData = async (id: string) => {
   const result = await fetch(`${process.env.APP_URL}/api/articles/${id}`, {
@@ -13,6 +14,17 @@ const getData = async (id: string) => {
     quizzes: JSON.parse(result.article.quizzes),
   } as ArticleType;
 };
+
+export async function generateMetadata(
+  { params }: { params: { id: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await getData(params.id);
+
+  return {
+    title: data?.en.split("\n")[0].replace(/#/g, "") || "wordy-smoky",
+  };
+}
 
 export default async function Home({ params }: { params: { id: string } }) {
   const article = await getData(params.id);

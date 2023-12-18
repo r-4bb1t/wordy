@@ -3,8 +3,8 @@ import "./globals.css";
 import Sidebar from "./components/sidebar";
 
 export const metadata: Metadata = {
-  title: "영어공부",
-  description: "ㄱㄱ",
+  title: "wordy-smoky",
+  description: "영어 아티클을 학습지로 변환해주는 서비스입니다.",
 };
 
 export default function RootLayout({
