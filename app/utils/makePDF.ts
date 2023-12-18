@@ -145,7 +145,7 @@ export const makePDF = async (article: ArticleType) => {
   const footerTitle = document.createElement("div");
   footerTitle.innerText = titleText;
   const footerSite = document.createElement("div");
-  footerSite.innerText = "https://wordy.vercel.app";
+  footerSite.innerText = "https://wordy-smoky.vercel.app";
 
   footer.appendChild(footerTitle);
   footer.appendChild(footerSite);
