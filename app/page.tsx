@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <Main
       defaultArticle={{
-        id: undefined,
+        id: null,
         en: DEFAULT_ARTICLE,
         ko: "",
         words: [],

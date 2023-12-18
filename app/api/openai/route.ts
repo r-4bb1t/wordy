@@ -23,7 +23,6 @@ export async function POST(request: Request) {
 
   const answer = completion.choices.map((choice) => choice.message.content);
   const json = JSON.parse(answer[0] || "null") || { words: [], quizzes: [] };
-  console.log(json);
 
   return Response.json(json);
 }

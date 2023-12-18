@@ -6,7 +6,6 @@ const getData = async (id: string) => {
   const result = await fetch(`${process.env.APP_URL}/api/articles/${id}`, {
     cache: "no-cache",
   }).then((res) => res.json());
-  console.log(result);
   if (!result.article) return null;
   return {
     ...result.article,

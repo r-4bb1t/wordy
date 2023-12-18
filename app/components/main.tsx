@@ -29,7 +29,7 @@ export default function Main({
       />
       {words.length > 0 && (
         <Result
-          id={defaultArticle.id}
+          id={defaultArticle.id!}
           words={words}
           quizzes={quizzes}
           en={en}

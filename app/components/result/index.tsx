@@ -31,6 +31,7 @@ export default function Result({
 
   const handlePDF = useCallback(async () => {
     makePDF({
+      id: null,
       en,
       ko,
       words,
