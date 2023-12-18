@@ -2,12 +2,13 @@ import { QuizType, WordType } from "@/app/types/result";
 import { PrismaClient } from "@prisma/client";
 import { NextRequest } from "next/server";
 
+
 const prisma = new PrismaClient();
 
-export async function GET({ params }: { params: { id: string } }) {
-  const article = await prisma.article.findUnique({
+export async function GET(_: Request, { params }: { params: { id: string } }) {
+  const article = await prisma.article.findFirst({
     where: {
-      id: "833227ef-0f0e-409e-bb0d-5d70405d6f48",
+      id: params.id,
     },
   });
   return Response.json({ article });

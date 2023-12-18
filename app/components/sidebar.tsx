@@ -4,9 +4,9 @@ import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 
 const getData = async () => {
-  const { articles } = await fetch(`${process.env.APP_URL}/api/articles`).then(
-    (res) => res.json()
-  );
+  const { articles } = await fetch(`${process.env.APP_URL}/api/articles`, {
+    next: { tags: ["articles"] },
+  }).then((res) => res.json());
   return articles as ArticleType[];
 };
 

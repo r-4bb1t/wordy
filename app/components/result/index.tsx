@@ -7,6 +7,7 @@ import Quizzes from "./quizzes";
 import Words from "./words";
 import { useRouter } from "next/navigation";
 import { makePDF } from "@/app/utils/makePDF";
+import { revalidateTag } from "next/cache";
 
 export default function Result({
   id,
@@ -69,6 +70,7 @@ export default function Result({
         router.push(`/article/${(await result.json()).id}`);
       }
     } catch (e) {
+      revalidateTag("articles");
       console.log(e);
     } finally {
       setLoading(false);

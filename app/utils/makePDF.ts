@@ -23,7 +23,8 @@ export const makePDF = async (article: ArticleType) => {
   title.innerText = titleText;
 
   const wordListTitle = document.createElement("div");
-  wordListTitle.className = "w-full text-2xl font-bold text-primary mb-4";
+  wordListTitle.className =
+    "w-full text-2xl font-bold text-primary mb-4 border-l-4 border-l-primary pl-4";
   wordListTitle.innerText = "Words in contents";
 
   const wordlist = document.createElement("ul");
@@ -75,7 +76,8 @@ export const makePDF = async (article: ArticleType) => {
   stitle1.innerText = titleText;
 
   const bodyTitle = document.createElement("div");
-  bodyTitle.className = "w-full text-2xl font-bold text-primary mb-4";
+  bodyTitle.className =
+    "w-full text-2xl font-bold text-primary mb-4 border-l-4 border-l-primary pl-4";
   bodyTitle.innerText = "Contents";
 
   const body = document.createElement("div");
@@ -92,7 +94,8 @@ export const makePDF = async (article: ArticleType) => {
   stitle2.innerText = titleText;
 
   const quizListTitle = document.createElement("div");
-  quizListTitle.className = "w-full text-2xl font-bold text-primary mb-4";
+  quizListTitle.className =
+    "w-full text-2xl font-bold text-primary mb-4 border-l-4 border-l-primary pl-4";
   quizListTitle.innerText = "Quiz";
 
   const quizlist = document.createElement("ol");
