@@ -70,7 +70,6 @@ export default function Input({
           visibleDragbar={false}
           height={400}
           className="w-full text-sm"
-          previewOptions={[]}
         />
       </div>
       <button
