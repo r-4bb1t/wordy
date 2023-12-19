@@ -139,17 +139,6 @@ export const makePDF = async (article: ArticleType) => {
     quizlist.appendChild(quiz);
   });
 
-  const footer = document.createElement("footer");
-  footer.className =
-    "flex justify-between items-center w-full text-xs font-medium text-primary print-footer";
-  const footerTitle = document.createElement("div");
-  footerTitle.innerText = titleText;
-  const footerSite = document.createElement("div");
-  footerSite.innerText = "https://wordy-smoky.vercel.app";
-
-  footer.appendChild(footerTitle);
-  footer.appendChild(footerSite);
-
   print.appendChild(title);
   print.appendChild(wordListTitle);
   print.appendChild(wordlist);
@@ -162,8 +151,6 @@ export const makePDF = async (article: ArticleType) => {
   print.appendChild(stitle2);
   print.appendChild(quizListTitle);
   print.appendChild(quizlist);
-
-  print.appendChild(footer);
 
   document.body.appendChild(print);
 
