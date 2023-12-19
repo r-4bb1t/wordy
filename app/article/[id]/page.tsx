@@ -3,15 +3,20 @@ import { ArticleType } from "@/app/types/articles";
 import { Metadata, ResolvingMetadata } from "next";
 
 const getData = async (id: string) => {
-  const result = await fetch(`${process.env.APP_URL}/api/articles/${id}`, {
-    cache: "no-cache",
-  }).then((res) => res.json());
-  if (!result.article) return null;
-  return {
-    ...result.article,
-    words: JSON.parse(result.article.words),
-    quizzes: JSON.parse(result.article.quizzes),
-  } as ArticleType;
+  try {
+    const result = await fetch(`${process.env.APP_URL}/api/articles/${id}`, {
+      cache: "no-cache",
+    }).then((res) => res.json());
+    if (!result.article) return null;
+    return {
+      ...result.article,
+      words: JSON.parse(result.article.words),
+      quizzes: JSON.parse(result.article.quizzes),
+    } as ArticleType;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 };
 
 export async function generateMetadata(
