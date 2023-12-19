@@ -17,7 +17,7 @@ export default function Result({
   ko,
   setKo,
 }: {
-  id?: string;
+  id: string | null;
   words: WordType[];
   quizzes: QuizType[];
   en: string;
