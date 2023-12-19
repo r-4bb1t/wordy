@@ -10,7 +10,7 @@ export default function Home() {
         ko: "",
         words: [],
         quizzes: [],
-        createdAt: new Date().toISOString(),
+        createdAt: null,
       }}
     />
   );

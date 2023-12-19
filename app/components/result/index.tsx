@@ -36,6 +36,7 @@ export default function Result({
       ko,
       words,
       quizzes,
+      createdAt: null,
     });
   }, [en, ko, quizzes, words]);
 
