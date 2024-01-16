@@ -3,23 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^5.7.0",
     "@types/showdown": "^2.0.6",
     "@uiw/react-md-editor": "4.0.1",
+    "cheerio": "1.0.0-rc.12",
     "classcat": "^5.0.4",
     "daisyui": "^3.9.4",
     "date-fns": "^2.30.0",
+    "firebase": "^10.7.1",
     "github-markdown-css": "^5.5.0",
     "next": "14.0.1",
     "openai": "^4.22.1",
-    "prisma": "^5.7.0",
     "react": "^18",
     "react-dom": "^18",
     "showdown": "^2.1.0"

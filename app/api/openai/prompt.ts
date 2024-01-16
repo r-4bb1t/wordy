@@ -12,7 +12,7 @@ example JSON:
       exampleSentence: {
           sentence: "I ate the apple.",
           meaning: "나는 사과를 먹었다."
-       }
+      }
     },
   ],
   quizzes: [
@@ -26,3 +26,19 @@ example JSON:
   ]
 }
 `;
+
+export interface ResponseType {
+  words: {
+    word: string;
+    meaning: string;
+    exampleSentence: {
+      sentence: string;
+      meaning: string;
+    };
+  }[];
+  quizzes: {
+    quiz: string;
+    options: string[];
+    answer: string;
+  }[];
+}

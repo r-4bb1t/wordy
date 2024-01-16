@@ -1,17 +1,19 @@
+import { db } from "@/app/firebase/client";
 import { QuizType, WordType } from "@/app/types/result";
-import { PrismaClient } from "@prisma/client";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { NextRequest } from "next/server";
 
-
-const prisma = new PrismaClient();
-
 export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const article = await prisma.article.findFirst({
-    where: {
-      id: params.id,
-    },
+  const docRef = doc(db, "article", params.id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return Response.json({ word: docSnap.data() });
+  }
+
+  return new Response("Not Found", {
+    status: 404,
   });
-  return Response.json({ article });
 }
 
 export async function PATCH(
@@ -29,14 +31,9 @@ export async function PATCH(
     words: WordType[];
     quizzes: QuizType[];
   } = await request.json();
-  const article = await prisma.article.update({
-    where: { id: params.id },
-    data: {
-      en,
-      ko,
-      words: JSON.stringify(words),
-      quizzes: JSON.stringify(quizzes),
-    },
-  });
-  return Response.json({ article });
+
+  const docRef = doc(db, "article", params.id);
+  await setDoc(docRef, { en, ko, words, quizzes });
+
+  return Response.json({ article: { en, ko, words, quizzes } });
 }
