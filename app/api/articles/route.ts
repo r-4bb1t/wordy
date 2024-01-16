@@ -1,14 +1,13 @@
+import { db } from "@/app/firebase/client";
 import { QuizType, WordType } from "@/app/types/result";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 export async function GET(request: Request) {
-  const articles = await prisma.article.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const articlesSnap = await getDocs(collection(db, "article"));
 
-  return Response.json({ articles });
+  return Response.json({
+    articles: articlesSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+  });
 }
 
 export async function POST(request: Request) {
@@ -19,13 +18,8 @@ export async function POST(request: Request) {
     quizzes,
   }: { en: string; ko: string; words: WordType[]; quizzes: QuizType[] } =
     await request.json();
-  const article = await prisma.article.create({
-    data: {
-      en,
-      ko,
-      words: JSON.stringify(words),
-      quizzes: JSON.stringify(quizzes),
-    },
-  });
-  return Response.json({ article });
+
+  await addDoc(collection(db, "article"), { en, ko, words, quizzes });
+
+  return Response.json({ article: { en, ko, words, quizzes } });
 }

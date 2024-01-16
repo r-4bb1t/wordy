@@ -8,11 +8,7 @@ const getData = async (id: string) => {
       cache: "no-cache",
     }).then((res) => res.json());
     if (!result.article) return null;
-    return {
-      ...result.article,
-      words: JSON.parse(result.article.words),
-      quizzes: JSON.parse(result.article.quizzes),
-    } as ArticleType;
+    return result.article as ArticleType;
   } catch (e) {
     console.log(e);
     return null;
@@ -30,7 +26,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function Home({ params }: { params: { id: string } }) {
+export default async function Article({ params }: { params: { id: string } }) {
   const article = await getData(params.id);
   if (!article) throw new Error("Article not found");
   return <Main defaultArticle={article} />;

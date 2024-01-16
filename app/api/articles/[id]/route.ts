@@ -1,6 +1,6 @@
 import { db } from "@/app/firebase/client";
 import { QuizType, WordType } from "@/app/types/result";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { DocumentReference, doc, getDoc, setDoc } from "firebase/firestore";
 import { NextRequest } from "next/server";
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
@@ -8,12 +8,15 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    return Response.json({ word: docSnap.data() });
+    const article = docSnap.data();
+    const promises = article.words.map(async (wordRef: DocumentReference) =>
+      (await getDoc(wordRef)).data()
+    );
+    const words = await Promise.all(promises);
+    return Response.json({ article: { ...article, words } });
   }
 
-  return new Response("Not Found", {
-    status: 404,
-  });
+  return Response.json({ article: null });
 }
 
 export async function PATCH(

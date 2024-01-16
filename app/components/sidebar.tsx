@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArticleType } from "../types/articles";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, isValid } from "date-fns";
 import { ko } from "date-fns/locale";
 
 const getData = async () => {
@@ -36,10 +36,11 @@ export default async function Sidebar() {
                 {article.en.split("\n")[0].replace(/#/g, "")}
               </div>
               <div className="font-light text-gray-500 shrink-0">
-                {formatDistanceToNow(new Date(article.createdAt!), {
-                  locale: ko,
-                  addSuffix: true,
-                })}
+                {isValid(new Date(article.createdAt!)) &&
+                  formatDistanceToNow(new Date(article.createdAt!), {
+                    locale: ko,
+                    addSuffix: true,
+                  })}
               </div>
             </Link>
           </li>
