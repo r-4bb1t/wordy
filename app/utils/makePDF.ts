@@ -109,7 +109,7 @@ export const makePDF = async (article: ArticleType) => {
 
     const quizIndex = document.createElement("span");
     quizIndex.className = "font-black text-primary";
-    quizIndex.innerText = `${index + 1}. `;
+    //quizIndex.innerText = `${index + 1}. `;
 
     quizTitle.appendChild(quizIndex);
     quizTitle.innerHTML += q.quiz;

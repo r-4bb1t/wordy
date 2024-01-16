@@ -3,16 +3,16 @@ import { WordType } from "@/app/types/result";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export async function POST(request: Request) {
-  const words: WordType = await request.json();
+  const word: WordType = await request.json();
 
   const collectionRef = collection(db, "word");
-  const docRef = doc(collectionRef, words.word);
+  const docRef = doc(collectionRef, word.word);
   const docSnap = await getDoc(docRef);
 
-  if (!docSnap.exists()) {
-    await setDoc(docRef, words);
-    return;
+  if (docSnap.exists()) {
+    return Response.json(docSnap.data());
   }
 
-  return Response.json(docRef);
+  await setDoc(docRef, word);
+  return Response.json(word);
 }

@@ -28,18 +28,16 @@ export async function POST(request: Request) {
     quizzes: [],
   };
 
-  const wordsRef = collection(db, "word");
-
   const promises = json.words.map(async (word) => {
-    const res = await fetch(`${process.env.APP_URL}/api/word/${word.word}`);
-    if (res.status === 200) {
-      return res.json();
-    }
-
-    const wordRef = doc(wordsRef, word.word);
-    await setDoc(wordRef, word);
-
-    return { word };
+    const res = await fetch(`${process.env.APP_URL}/api/word`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(word),
+    });
+    const json = await res.json();
+    return json;
   });
 
   const words = await Promise.all(promises);

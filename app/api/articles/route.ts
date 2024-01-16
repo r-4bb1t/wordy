@@ -1,6 +1,6 @@
 import { db } from "@/app/firebase/client";
 import { QuizType, WordType } from "@/app/types/result";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 
 export async function GET(request: Request) {
   const articlesSnap = await getDocs(collection(db, "article"));
@@ -19,25 +19,12 @@ export async function POST(request: Request) {
   }: { en: string; ko: string; words: WordType[]; quizzes: QuizType[] } =
     await request.json();
 
-    const promises = words.map(async (word) => {
-      const res = await fetch(`${process.env.APP_URL}/api/word`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(word),
-      });
-      return await res.json();
-    });
+  const newDoc = await addDoc(collection(db, "article"), {
+    en,
+    ko,
+    words: words.map((word) => doc(db, "word/" + word.word)),
+    quizzes,
+  });
 
-    const list = (await Promise.all(promises)) || [];
-
-    await addDoc(collection(db, "article"), {
-      en,
-      ko,
-      words: list,
-      quizzes,
-    });
-
-    return Response.json({ article: { en, ko, words: list, quizzes } });
+  return Response.json({ article: { en, ko, words, quizzes, id: newDoc.id } });
 }

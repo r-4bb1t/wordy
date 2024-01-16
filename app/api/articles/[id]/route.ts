@@ -35,23 +35,13 @@ export async function PATCH(
     quizzes: QuizType[];
   } = await request.json();
 
-  const promises = words.map(async (word) => {
-    const res = await fetch(`${process.env.APP_URL}/api/word`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(word),
-    });
-
-    const w = await res.json();
-    return w;
+  const docRef = doc(db, "article", params.id);
+  await setDoc(docRef, {
+    en,
+    ko,
+    words: words.map((word) => doc(db, "word/" + word.word)),
+    quizzes,
   });
 
-  const list = await Promise.all(promises);
-
-  const docRef = doc(db, "article", params.id);
-  await setDoc(docRef, { en, ko, words: list, quizzes });
-
-  return Response.json({ article: { en, ko, words: list, quizzes } });
+  return Response.json({ article: { en, ko, words, quizzes } });
 }
