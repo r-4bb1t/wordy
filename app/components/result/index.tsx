@@ -42,6 +42,7 @@ export default function Result({
 
   const handleSave = useCallback(async () => {
     setLoading(true);
+    alert(id);
     try {
       if (id) {
         await fetch(`/api/articles/${id}`, {

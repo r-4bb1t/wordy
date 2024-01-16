@@ -19,7 +19,25 @@ export async function POST(request: Request) {
   }: { en: string; ko: string; words: WordType[]; quizzes: QuizType[] } =
     await request.json();
 
-  await addDoc(collection(db, "article"), { en, ko, words, quizzes });
+    const promises = words.map(async (word) => {
+      const res = await fetch(`${process.env.APP_URL}/api/word`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(word),
+      });
+      return await res.json();
+    });
 
-  return Response.json({ article: { en, ko, words, quizzes } });
+    const list = (await Promise.all(promises)) || [];
+
+    await addDoc(collection(db, "article"), {
+      en,
+      ko,
+      words: list,
+      quizzes,
+    });
+
+    return Response.json({ article: { en, ko, words: list, quizzes } });
 }

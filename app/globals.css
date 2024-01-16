@@ -48,6 +48,10 @@
   background-color: transparent !important;
 }
 
+.wmde-markdown ul {
+  list-style-type: disc !important;
+}
+
 .wmde-markdown p {
   margin-bottom: 8px !important;
 }

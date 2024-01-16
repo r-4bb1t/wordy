@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }
 
     const wordRef = doc(wordsRef, word.word);
-    await setDoc(wordRef, { word });
+    await setDoc(wordRef, word);
 
     return { word };
   });

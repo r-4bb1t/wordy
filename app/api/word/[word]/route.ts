@@ -1,5 +1,5 @@
 import { db } from "@/app/firebase/client";
-import { doc, getDoc, where } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 export async function GET(
   _: Request,
@@ -9,7 +9,7 @@ export async function GET(
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    return Response.json({ word: docSnap.data() });
+    return Response.json(docSnap.data());
   }
 
   return new Response("Not Found", {
