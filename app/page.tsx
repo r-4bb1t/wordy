@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <div className="w-full h-screen bg-white flex flex-col items-center p-12">
       <Header />
-      <ul className="w-full py-2 gap-2 grid grid-cols-4 mt-12">
+      <ul className="w-full py-2 gap-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-12">
         {articles.map((article, i) => (
           <li className="w-full" key={i}>
             <Link
