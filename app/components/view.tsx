@@ -64,7 +64,7 @@ export default function View({ article }: { article: ArticleType }) {
           dangerouslySetInnerHTML={{ __html: english }}
         />
         <div
-          className="markdown-body markdown-body-sm p-4 !bg-base-200"
+          className="markdown-body markdown-body-sm p-4 !bg-base-200 w-full"
           dangerouslySetInnerHTML={{ __html: korean }}
         />
         <div className="w-full text-2xl font-bold text-primary my-6 border-l-4 border-l-primary pl-4">

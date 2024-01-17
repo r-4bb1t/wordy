@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { revalidateTag } from "next/cache";
 
 export default function Result({
+  title,
   id,
   words,
   quizzes,
@@ -40,6 +41,7 @@ export default function Result({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            title,
             en,
             ko,
             words,
