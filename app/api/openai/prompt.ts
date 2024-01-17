@@ -1,5 +1,5 @@
 export const PROMPT = `
-1. Pick just 10 difficult words and korean meaning, example sentence.
+1. Pick just 20 difficult words and korean meaning, example sentence.
 2. make just 3 quizzes about article.
 Your response must be only JSON.
 
