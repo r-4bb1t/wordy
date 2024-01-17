@@ -1,6 +1,12 @@
 import { db } from "@/app/firebase/client";
 import { ArticleType } from "@/app/types/articles";
-import { DocumentReference, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  DocumentReference,
+  Timestamp,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { NextRequest } from "next/server";
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
@@ -13,7 +19,14 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
       (await getDoc(wordRef)).data()
     );
     const words = await Promise.all(promises);
-    return Response.json({ article: { ...article, words, id: params.id } });
+    return Response.json({
+      article: {
+        ...article,
+        words,
+        id: params.id,
+        createdAt: (article.createdAt as Timestamp).toDate(),
+      },
+    });
   }
 
   return Response.json({ article: null });
@@ -32,6 +45,7 @@ export async function PATCH(
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),
     quizzes,
+    createdAt: new Date(),
   });
 
   return Response.json({ article: { en, ko, words, quizzes } });

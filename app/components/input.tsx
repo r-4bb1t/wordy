@@ -11,6 +11,8 @@ import "@uiw/react-markdown-preview/markdown.css";
 export default function Input({
   title,
   setTitle,
+  image,
+  setImage,
   setWords,
   en,
   setEn,
@@ -19,6 +21,8 @@ export default function Input({
 }: {
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
+  image: string;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
   setWords: React.Dispatch<React.SetStateAction<WordType[]>>;
   en: string;
   setEn: React.Dispatch<React.SetStateAction<string>>;
@@ -71,6 +75,15 @@ export default function Input({
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <input
+        className="input w-full input-primary input-bordered"
+        placeholder="image"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+      />
+      <div className="w-full h-64 overflow-hidden rounded-lg border-primary border">
+        <img className="w-full h-full object-cover" src={image} />
+      </div>
       <div className="w-full border border-primary rounded-xl overflow-hidden">
         <MDEditor
           value={en}

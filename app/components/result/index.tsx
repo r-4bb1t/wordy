@@ -6,11 +6,9 @@ import Article from "./article";
 import Quizzes from "./quizzes";
 import Words from "./words";
 import { useRouter } from "next/navigation";
-import { makePDF } from "@/app/utils/makePDF";
 import { revalidateTag } from "next/cache";
 
 export default function Result({
-  title,
   id,
   words,
   quizzes,
@@ -19,6 +17,7 @@ export default function Result({
   setKo,
 }: {
   title: string;
+  image: string;
   id: string | null;
   words: WordType[];
   quizzes: QuizType[];
@@ -30,18 +29,6 @@ export default function Result({
   const page = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
-
-  const handlePDF = useCallback(async () => {
-    makePDF({
-      id: null,
-      title,
-      en,
-      ko,
-      words,
-      quizzes,
-      createdAt: null,
-    });
-  }, [en, ko, quizzes, words]);
 
   const handleSave = useCallback(async () => {
     setLoading(true);
@@ -82,18 +69,18 @@ export default function Result({
     }
   }, [en, id, ko, quizzes, router, words]);
   return (
-    <div className="w-full flex flex-col items-center gap-8">
-      <div className="w-full flex flex-col items-center gap-8" ref={page}>
-        <Words words={words} />
-        <Article
-          en={en}
-          ko={ko}
-          words={words.map((w) => w.word)}
-          setKo={setKo}
-        />
-        <Quizzes quizzes={quizzes} />
-      </div>
-      <div className="flex gap-2">
+    <>
+      <div className="w-full flex flex-col items-center gap-8">
+        <div className="w-full flex flex-col items-center gap-8" ref={page}>
+          <Words words={words} />
+          <Article
+            en={en}
+            ko={ko}
+            words={words.map((w) => w.word)}
+            setKo={setKo}
+          />
+          <Quizzes quizzes={quizzes} />
+        </div>
         <button
           className="btn btn-primary"
           onClick={() => handleSave()}
@@ -101,15 +88,7 @@ export default function Result({
         >
           {loading ? <div className="loading loading-dots" /> : "저장"}
         </button>
-        <button
-          className="btn btn-primary btn-outline"
-          onClick={() => {
-            handlePDF();
-          }}
-        >
-          PDF 다운로드
-        </button>
       </div>
-    </div>
+    </>
   );
 }

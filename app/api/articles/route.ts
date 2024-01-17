@@ -1,12 +1,25 @@
 import { db } from "@/app/firebase/client";
 import { ArticleType } from "@/app/types/articles";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 
 export async function GET(request: Request) {
   const articlesSnap = await getDocs(collection(db, "article"));
 
   return Response.json({
-    articles: articlesSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+    articles: articlesSnap.docs.map((doc) => {
+      const article = doc.data();
+      return {
+        ...article,
+        id: doc.id,
+        createdAt: (article.createdAt as Timestamp).toDate(),
+      };
+    }),
   });
 }
 
@@ -19,6 +32,7 @@ export async function POST(request: Request) {
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),
     quizzes,
+    createdAt: new Date(),
   });
 
   return Response.json({ article: { en, ko, words, quizzes, id: newDoc.id } });

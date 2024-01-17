@@ -15,11 +15,18 @@
   color: black !important;
 }
 
+/* .printable {
+  display: none;
+}
+
 @media print {
   body *:not(.printable, .printable *) {
     display: none;
   }
-}
+  .printable {
+    display: flex !important;
+  }
+} */
 
 @page {
   size: auto;
@@ -63,6 +70,11 @@
 
 .markdown-body p {
   margin-bottom: 4px !important;
+}
+
+.markdown-body a {
+  color: inherit !important;
+  pointer-events: none !important;
 }
 
 .markdown-body-sm {

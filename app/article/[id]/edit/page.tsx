@@ -1,4 +1,4 @@
-import View from "@/app/components/view";
+import Edit from "@/app/components/edit";
 import { ArticleType } from "@/app/types/articles";
 import { Metadata, ResolvingMetadata } from "next";
 
@@ -29,5 +29,5 @@ export async function generateMetadata(
 export default async function Article({ params }: { params: { id: string } }) {
   const article = await getData(params.id);
   if (!article) throw new Error("Article not found");
-  return <View article={article} />;
+  return <Edit defaultArticle={article} />;
 }

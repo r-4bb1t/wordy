@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "./components/sidebar";
 
 export const metadata: Metadata = {
   title: "wordy",
@@ -14,12 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
-        <div className="flex w-full">
-          <Sidebar />
-          {children}
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
