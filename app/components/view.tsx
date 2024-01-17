@@ -33,13 +33,19 @@ export default function View({ article }: { article: ArticleType }) {
           {words.map((word, i) => (
             <li
               key={i}
-              className="grid grid-cols-[200px_1fr] break-inside-avoid"
+              className="grid md:grid-cols-[200px_1fr] break-inside-avoid"
             >
-              <div className="font-black text-primary text-xl flex items-center px-4 py-2 border-t-4 border-t-primary !bg-base-200">
+              <div className="font-black text-primary text-xl flex md:items-center px-4 py-2 gap-4 border-t-4 border-t-primary !bg-base-200">
                 {word.word}
+                <div className="font-medium md:hidden">
+                  <span className="text-primary">
+                    {word.meaning.split(". ")[0] + ". "}
+                  </span>
+                  {word.meaning.split(". ")[1]}
+                </div>
               </div>
-              <div className="flex flex-col gap-1 px-4 py-2 border-t border-t-base-300">
-                <div className="font-medium">
+              <div className="flex flex-col gap-1 px-4 border-t border-t-base-300 py-4 md:py-2">
+                <div className="font-medium hidden md:block">
                   <span className="text-primary">
                     {word.meaning.split(". ")[0] + ". "}
                   </span>
