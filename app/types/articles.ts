@@ -1,6 +1,7 @@
 import { QuizType, WordType } from "./result";
 
 export interface ArticleType {
+  title: string;
   id: string | null;
   en: string;
   ko: string;

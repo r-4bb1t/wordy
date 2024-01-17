@@ -4,13 +4,12 @@ import { emphasize } from "@/app/utils/emphasize";
 import "github-markdown-css";
 
 export const makePDF = async (article: ArticleType) => {
-  const { en, ko, words, quizzes } = article;
+  const { title: titleText, en, ko, words, quizzes } = article;
   const converter = new showdown.Converter(),
     text = emphasize(
       en,
       words.map((w) => w.word)
     ),
-    titleText = en.split("\n")[0].replace(/#/g, ""),
     english = converter.makeHtml(text).replace(/<h1.*?>.*?<\/h1>/g, ""),
     korean = converter.makeHtml(ko).replace(/<h1.*?>.*?<\/h1>/g, "");
 
@@ -21,7 +20,6 @@ export const makePDF = async (article: ArticleType) => {
   title.className =
     "w-full text-3xl font-black mb-8 before:content-['#'] before:mr-1 before:text-primary";
   title.innerText = titleText;
-
   const wordListTitle = document.createElement("div");
   wordListTitle.className =
     "w-full text-2xl font-bold text-primary mb-4 border-l-4 border-l-primary pl-4";

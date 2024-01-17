@@ -16,6 +16,7 @@ export default function Main({
   const [ko, setKo] = useState(defaultArticle.ko);
   const [words, setWords] = useState<WordType[]>(defaultArticle.words);
   const [quizzes, setquizzes] = useState<QuizType[]>(defaultArticle.quizzes);
+  const [title, setTitle] = useState(defaultArticle.title);
 
   return (
     <main className="flex flex-col items-center w-full gap-8 px-4 py-12 bg-base-200">
@@ -26,9 +27,12 @@ export default function Main({
         setEn={setEn}
         setKo={setKo}
         setquizzes={setquizzes}
+        title={title}
+        setTitle={setTitle}
       />
       {words.length > 0 && (
         <Result
+          title={title}
           id={defaultArticle.id}
           words={words}
           quizzes={quizzes}

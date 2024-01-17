@@ -9,12 +9,16 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 
 export default function Input({
+  title,
+  setTitle,
   setWords,
   en,
   setEn,
   setKo,
   setquizzes,
 }: {
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
   setWords: React.Dispatch<React.SetStateAction<WordType[]>>;
   en: string;
   setEn: React.Dispatch<React.SetStateAction<string>>;
@@ -61,6 +65,12 @@ export default function Input({
 
   return (
     <div className="w-full flex flex-col max-w-5xl items-center gap-8">
+      <input
+        className="input input-lg w-full input-primary input-bordered font-bold"
+        placeholder="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
       <div className="w-full border border-primary rounded-xl overflow-hidden">
         <MDEditor
           value={en}

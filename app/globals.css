@@ -5,12 +5,13 @@
 @font-face {
   font-family: "SUIT";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-       format("woff2");
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
-:root, [data-theme] {
+:root,
+[data-theme] {
   color: black !important;
 }
 
@@ -20,24 +21,27 @@
   }
 }
 
-@page  
-{ 
-    size: auto; 
-    margin: 80px 64px 48px 64px;
-} 
+@page {
+  size: auto;
+  margin: 80px 64px 48px 64px;
+}
 
 @layer components {
   .highlight {
     @apply underline underline-offset-2 decoration-dotted decoration-primary;
   }
 }
-  
+
 * {
   font-family: "SUIT";
 }
-  
+
 .w-md-editor {
   box-shadow: none !important;
+}
+
+.w-md-editor-input * {
+  font-family: var(--md-editor-font-family) !important;
 }
 
 .w-md-editor-preview {
@@ -48,7 +52,8 @@
   background-color: transparent !important;
 }
 
-.wmde-markdown ul, .markdown-body ul {
+.wmde-markdown ul,
+.markdown-body ul {
   list-style-type: disc !important;
 }
 

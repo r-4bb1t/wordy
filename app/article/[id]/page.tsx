@@ -22,7 +22,7 @@ export async function generateMetadata(
   const data = await getData(params.id);
 
   return {
-    title: data?.en.split("\n")[0].replace(/#/g, "") || "wordy-smoky",
+    title: data?.title,
   };
 }
 

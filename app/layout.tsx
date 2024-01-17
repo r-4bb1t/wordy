@@ -3,7 +3,7 @@ import "./globals.css";
 import Sidebar from "./components/sidebar";
 
 export const metadata: Metadata = {
-  title: "wordy-smoky",
+  title: "wordy",
   description: "영어 아티클을 학습지로 변환해주는 서비스입니다.",
 };
 

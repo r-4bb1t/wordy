@@ -10,6 +10,7 @@ import { makePDF } from "@/app/utils/makePDF";
 import { revalidateTag } from "next/cache";
 
 export default function Result({
+  title,
   id,
   words,
   quizzes,
@@ -17,6 +18,7 @@ export default function Result({
   ko,
   setKo,
 }: {
+  title: string;
   id: string | null;
   words: WordType[];
   quizzes: QuizType[];
@@ -32,6 +34,7 @@ export default function Result({
   const handlePDF = useCallback(async () => {
     makePDF({
       id: null,
+      title,
       en,
       ko,
       words,
