@@ -1,5 +1,5 @@
 import { db } from "@/app/firebase/client";
-import { QuizType, WordType } from "@/app/types/result";
+import { ArticleType } from "@/app/types/articles";
 import { DocumentReference, doc, getDoc, setDoc } from "firebase/firestore";
 import { NextRequest } from "next/server";
 
@@ -23,20 +23,11 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const {
-    en,
-    ko,
-    words,
-    quizzes,
-  }: {
-    en: string;
-    ko: string;
-    words: WordType[];
-    quizzes: QuizType[];
-  } = await request.json();
+  const { title, en, ko, words, quizzes }: ArticleType = await request.json();
 
   const docRef = doc(db, "article", params.id);
   await setDoc(docRef, {
+    title,
     en,
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),

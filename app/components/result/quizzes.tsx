@@ -8,13 +8,13 @@ export default function Quizzes({ quizzes }: { quizzes: QuizType[] }) {
           <div className="font-bold">
             <span className="font-black text-primary">Q.</span> {quiz.quiz}
           </div>
-          <ol className="flex flex-col gap-2 _list-decimal list-inside">
+          <ul className="flex flex-col gap-2 list-disc list-inside">
             {quiz.options.map((option, j) => (
               <li key={j} className="font-medium">
                 {option}
               </li>
             ))}
-          </ol>
+          </ul>
           <div className="text-xs w-full text-right">
             <span className="font-medium text-primary">A.</span> {quiz.answer}
           </div>

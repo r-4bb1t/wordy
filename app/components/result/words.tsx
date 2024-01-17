@@ -2,9 +2,9 @@ import { WordType } from "@/app/types/result";
 
 export default function Words({ words }: { words: WordType[] }) {
   return (
-    <ul className="w-full max-w-5xl p-12 grid grid-cols-2 gap-2 text-sm border-primary border rounded-xl bg-white">
+    <ul className="w-full max-w-5xl p-12 columns-2 text-sm border-primary border rounded-xl bg-white">
       {words.map((word, i) => (
-        <li key={i} className="flex flex-col">
+        <li key={i} className="flex flex-col mb-2 break-inside-avoid-column">
           <div className="font-bold">
             {word.word}
             <span className="font-medium ml-2">{word.meaning}</span>
