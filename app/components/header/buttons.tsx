@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import SignIn from "../sign-in";
 import Modal from "../modal";
-import { toggle } from "./action";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/lib/firebase/client";
+import Darkmode from "./darkmode";
 
 const greet = () => {
   const hour = new Date().getHours();
@@ -38,12 +38,7 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
 
   return (
     <div className="flex items-center gap-2">
-      <input
-        type="checkbox"
-        className="toggle toggle-sm !transition-all"
-        checked={theme === "dark"}
-        onChange={async () => toggle()}
-      />
+      <Darkmode theme={theme} />
       {user ? (
         <button className="btn btn-ghost normal-case font-medium gap-0 pointer-events-none">
           <div className="hidden md:block">
