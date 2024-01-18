@@ -7,7 +7,7 @@ export default function Darkmode({ theme }: { theme: "light" | "dark" }) {
   return (
     <div className="flex items-center gap-2">
       <div className="swap swap-rotate pointer-events-none">
-        <input type="checkbox" checked={theme === "dark"} />
+        <input type="checkbox" checked={theme === "dark"} readOnly />
         <IoMoonOutline className="swap-on" />
         <IoSunnyOutline className="swap-off" />
       </div>

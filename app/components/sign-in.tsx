@@ -2,13 +2,16 @@ import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { IoLogoGithub } from "react-icons/io5";
 import { auth } from "../lib/firebase/client";
 import { useState } from "react";
+import { useUserStore } from "../store/user-store";
 
 export default function SignIn({ close }: { close: () => void }) {
   const [error, setError] = useState<string | null>(null);
+  const { setUser } = useUserStore();
 
   const handleSignIn = async () => {
     const res = await signInWithPopup(auth, new GithubAuthProvider());
     if (res.user) {
+      setUser(res.user);
       setError(null);
       close();
       return;

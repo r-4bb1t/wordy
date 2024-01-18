@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import SignIn from "../sign-in";
 import Modal from "../modal";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/app/lib/firebase/client";
 import Darkmode from "./darkmode";
+import { useUserStore } from "@/app/store/user-store";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/app/lib/firebase/client";
 
 const greet = () => {
   const hour = new Date().getHours();
@@ -17,24 +18,14 @@ const greet = () => {
 
 export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
   const [isOpenedSignIn, setIsOpenedSignIn] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const { user, setUser } = useUserStore();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
     return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (authUser) => {
-      if (!user) {
-        setUser(null);
-        return;
-      }
-      setUser(authUser);
-    });
-  }, [user]);
+  }, [setUser]);
 
   return (
     <div className="flex items-center gap-2">

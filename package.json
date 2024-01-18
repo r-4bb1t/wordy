@@ -26,7 +26,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
-    "showdown": "^2.1.0"
+    "showdown": "^2.1.0",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/blob-stream": "^0.1.33",
