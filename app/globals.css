@@ -38,7 +38,7 @@
     @apply relative underline inline-flex justify-center underline-offset-2 decoration-dotted decoration-primary;
   }
   .ttip {
-    @apply absolute opacity-0 transition-opacity -top-7 whitespace-nowrap h-max bg-base-200 w-max px-4 py-1 flex flex-col font-semibold rounded-xl text-sm;
+    @apply absolute opacity-0 pointer-events-none transition-opacity -top-7 whitespace-nowrap h-max bg-base-200 w-max px-4 py-1 flex flex-col font-semibold rounded-xl text-sm;
   }
   .highlight:hover .ttip {
     @apply opacity-100;
