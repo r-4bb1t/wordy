@@ -1,4 +1,4 @@
-import View from "@/app/components/view";
+import View from "@/app/article/[id]/view";
 import { ArticleType } from "@/app/types/articles";
 import { Metadata, ResolvingMetadata } from "next";
 

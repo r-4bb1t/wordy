@@ -1,7 +1,7 @@
 export default function Header() {
   return (
-    <h1 className="text-4xl font-black">
-      영어 <span className="text-primary">아티클</span> 읽자
-    </h1>
+    <header className="fixed top-0 w-full flex items-center py-4 justify-between px-12 bg-black text-white font-black">
+      wordy
+    </header>
   );
 }
