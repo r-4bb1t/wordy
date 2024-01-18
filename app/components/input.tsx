@@ -38,6 +38,7 @@ export default function Input({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: en }),
+      cache: "no-store",
     });
     const { message } = await translateResult.json();
     setKo(message);
@@ -50,6 +51,7 @@ export default function Input({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ article: en }),
+      cache: "no-store",
     });
     const { words, quizzes } = await wordsResult.json();
     setWords(words);

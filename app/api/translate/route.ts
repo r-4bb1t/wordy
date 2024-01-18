@@ -10,6 +10,7 @@ export async function POST(request: Request) {
       target_lang: "ko",
       text: [text],
     }),
+    cache: "no-store",
   });
   const json = await response.json();
   return Response.json({ message: json.translations[0].text });

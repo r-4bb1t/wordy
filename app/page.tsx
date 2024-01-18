@@ -7,7 +7,7 @@ import Header from "./components/header";
 const getData = async () => {
   try {
     const { articles } = await fetch(`${process.env.APP_URL}/api/articles`, {
-      next: { tags: ["articles"] },
+      cache: "no-store",
     }).then((res) => res.json());
     return articles as ArticleType[];
   } catch (e) {

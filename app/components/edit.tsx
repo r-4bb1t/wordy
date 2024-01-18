@@ -39,6 +39,7 @@ export default function Edit({
             words,
             quizzes,
           }),
+          cache: "no-store",
         });
         router.replace(`/article/${defaultArticle.id}`);
       } else {
@@ -55,6 +56,7 @@ export default function Edit({
             words,
             quizzes,
           }),
+          cache: 'no-store'
         });
         router.push(`/article/${(await result.json()).id}`);
       }
