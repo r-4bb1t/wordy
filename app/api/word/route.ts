@@ -1,4 +1,4 @@
-import { db } from "@/app/firebase/client";
+import { db } from "@/app/lib/firebase/client";
 import { WordType } from "@/app/types/result";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 

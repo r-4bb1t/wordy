@@ -1,4 +1,4 @@
-import { db } from "@/app/firebase/client";
+import { db } from "@/app/lib/firebase/client";
 import { ArticleType } from "@/app/types/articles";
 import {
   DocumentReference,

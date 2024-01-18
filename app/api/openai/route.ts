@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { PROMPT, ResponseType } from "./prompt";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db } from "@/app/firebase/client";
+import { db } from "@/app/lib/firebase/client";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
