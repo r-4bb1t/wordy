@@ -20,15 +20,24 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const handleAuthStateChanged = onAuthStateChanged(auth, (user) => {
-      if (user) setUser(user);
-      else setUser(null);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
     });
-    return () => handleAuthStateChanged();
+    return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (authUser) => {
+      if (!user) {
+        setUser(null);
+        return;
+      }
+      setUser(authUser);
+    });
+  }, [user]);
+
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-2">
       <input
         type="checkbox"
         className="toggle toggle-sm !transition-all"
