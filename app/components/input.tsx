@@ -3,31 +3,16 @@
 import { useCallback, useState } from "react";
 
 import MDEditor from "@uiw/react-md-editor";
-import { QuizType, WordType } from "../types/result";
-
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
+import { ArticleType } from "../types/articles";
 
 export default function Input({
-  title,
-  setTitle,
-  image,
-  setImage,
-  setWords,
-  en,
-  setEn,
-  setKo,
-  setquizzes,
+  article,
+  setArticle,
 }: {
-  title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  image: string;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
-  setWords: React.Dispatch<React.SetStateAction<WordType[]>>;
-  en: string;
-  setEn: React.Dispatch<React.SetStateAction<string>>;
-  setKo: React.Dispatch<React.SetStateAction<string>>;
-  setquizzes: React.Dispatch<React.SetStateAction<QuizType[]>>;
+  article: ArticleType;
+  setArticle: React.Dispatch<React.SetStateAction<ArticleType>>;
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -37,12 +22,12 @@ export default function Input({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: en }),
+      body: JSON.stringify({ text: article.en }),
       cache: "no-store",
     });
     const { message } = await translateResult.json();
-    setKo(message);
-  }, [en, setKo]);
+    setArticle((article) => ({ ...article, ko: message }));
+  }, [article, setArticle]);
 
   const makeWords = useCallback(async () => {
     const wordsResult = await fetch("/api/openai", {
@@ -50,13 +35,12 @@ export default function Input({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ article: en }),
+      body: JSON.stringify({ article: article.en }),
       cache: "no-store",
     });
     const { words, quizzes } = await wordsResult.json();
-    setWords(words);
-    setquizzes(quizzes);
-  }, [en, setquizzes, setWords]);
+    setArticle((article) => ({ ...article, words, quizzes }));
+  }, [article, setArticle]);
 
   const makeResult = useCallback(async () => {
     setLoading(true);
@@ -76,8 +60,10 @@ export default function Input({
         <input
           className="input input-lg w-full input-primary input-bordered font-bold"
           placeholder="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={article.title}
+          onChange={(e) =>
+            setArticle((article) => ({ ...article, title: e.target.value }))
+          }
         />
       </div>
       <div className="w-full">
@@ -85,18 +71,43 @@ export default function Input({
         <input
           className="input w-full input-primary input-bordered"
           placeholder="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
+          value={article.image}
+          onChange={(e) =>
+            setArticle((article) => ({ ...article, image: e.target.value }))
+          }
         />
       </div>
+      <div className="w-full">
+        <h1 className="text-lg font-bold mb-2">Author&Original URL</h1>
+        <div className="grid grid-cols-[1fr_2fr] gap-4">
+          <input
+            className="input w-full input-primary input-bordered"
+            placeholder="author"
+            value={article.author}
+            onChange={(e) =>
+              setArticle((article) => ({ ...article, author: e.target.value }))
+            }
+          />
+          <input
+            className="input w-full input-primary input-bordered"
+            placeholder="url"
+            value={article.url}
+            onChange={(e) =>
+              setArticle((article) => ({ ...article, url: e.target.value }))
+            }
+          />
+        </div>
+      </div>
       <div className="w-full h-64 overflow-hidden border-primary border">
-        <img className="w-full h-full object-cover" src={image} />
+        <img className="w-full h-full object-cover" src={article.image} />
       </div>
       <div className="w-full border border-primary overflow-hidden">
         <MDEditor
-          value={en}
-          // @ts-ignore
-          onChange={setEn}
+          value={article.en}
+          onChange={(value) =>
+            // @ts-ignore
+            setArticle((article) => ({ ...article, en: value }))
+          }
           preview="live"
           visibleDragbar={false}
           height={400}

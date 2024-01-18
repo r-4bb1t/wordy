@@ -9,4 +9,6 @@ export interface ArticleType {
   words: WordType[];
   quizzes: QuizType[];
   createdAt: string | null;
+  url: string;
+  author: string;
 }

@@ -12,12 +12,7 @@ export default function Edit({
 }: {
   defaultArticle: ArticleType;
 }) {
-  const [en, setEn] = useState(defaultArticle.en);
-  const [ko, setKo] = useState(defaultArticle.ko);
-  const [words, setWords] = useState<WordType[]>(defaultArticle.words);
-  const [quizzes, setquizzes] = useState<QuizType[]>(defaultArticle.quizzes);
-  const [title, setTitle] = useState(defaultArticle.title);
-  const [image, setImage] = useState(defaultArticle.image);
+  const [article, setArticle] = useState<ArticleType>(defaultArticle);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -31,14 +26,7 @@ export default function Edit({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            title,
-            image,
-            en,
-            ko,
-            words,
-            quizzes,
-          }),
+          body: JSON.stringify(article),
           cache: "no-store",
         });
         router.replace(`/article/${defaultArticle.id}`);
@@ -48,15 +36,8 @@ export default function Edit({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            title,
-            image,
-            en,
-            ko,
-            words,
-            quizzes,
-          }),
-          cache: 'no-store'
+          body: JSON.stringify(article),
+          cache: "no-store",
         });
         router.push(`/article/${(await result.json()).id}`);
       }
@@ -65,38 +46,29 @@ export default function Edit({
     } finally {
       setLoading(false);
     }
-  }, [en, ko, quizzes, router, words]);
+  }, [article, defaultArticle.id, router]);
 
   return (
-    <main className="flex flex-col items-center w-full gap-8 px-4 py-16 md:py-24">
-      <Input
-        setWords={setWords}
-        en={en}
-        setEn={setEn}
-        setKo={setKo}
-        setquizzes={setquizzes}
-        title={title}
-        setTitle={setTitle}
-        image={image}
-        setImage={setImage}
-      />
+    <main className="flex flex-col items-center w-full gap-8 px-4 py-12 md:py-20">
+      <Input article={article} setArticle={setArticle} />
 
       <div className="w-full flex flex-col items-center gap-8">
-        {words.length > 0 && (
-          <Result
-            words={words}
-            quizzes={quizzes}
-            en={en}
-            ko={ko}
-            setKo={setKo}
-          />
+        {article.words.length > 0 && (
+          <Result article={article} setArticle={setArticle} />
         )}
         <button
           className="btn btn-primary"
           onClick={() => handleSave()}
           disabled={loading}
         >
-          {loading ? <div className="loading loading-dots" /> : "저장"}
+          {loading ? (
+            <>
+              <div className="loading loading-spinner" />
+              저장
+            </>
+          ) : (
+            "저장"
+          )}
         </button>
       </div>
     </main>

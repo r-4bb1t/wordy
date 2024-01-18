@@ -7,9 +7,11 @@ import { emphasize } from "../../utils/emphasize";
 import Showdown from "showdown";
 import Quizzes from "./quizzes";
 import Words from "./words";
+import { IoIosLink } from "react-icons/io";
+import Link from "next/link";
 
 export default function View({ article }: { article: ArticleType }) {
-  const { title, en, ko, words, quizzes } = article;
+  const { title, en, ko, words, quizzes, author, url } = article;
   const converter = new Showdown.Converter(),
     text = emphasize(en, words),
     english = converter.makeHtml(text).replace(/<h1.*?>.*?<\/h1>/g, ""),
@@ -20,13 +22,20 @@ export default function View({ article }: { article: ArticleType }) {
   }, []);
 
   return (
-    <main className="flex flex-col items-center w-full gap-8 px-4 py-16 md:py-24 print:p-0 overflow-x-hidden">
+    <main className="flex flex-col items-center w-full gap-8 px-4 py-12 md:py-20 print:p-0 overflow-x-hidden">
       <div className="w-full flex flex-col items-center !bg-white max-w-5xl print:max-w-none">
         <div className="p-6 flex flex-col items-center">
           <div className="w-16 h-1 mb-4 bg-primary" />
           <div className="text-3xl font-black text-center px-0 md:px-12 lg:px-24">
             {title}
           </div>
+          <Link
+            href={url}
+            className="mt-2 text-black/80 flex items-center gap-2"
+          >
+            {author}
+            <IoIosLink />
+          </Link>
         </div>
         <div className="w-full h-48 overflow-hidden">
           <img src={article.image} className="w-full h-full object-cover" />

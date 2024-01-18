@@ -14,9 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className="h-[100dvh] overflow-y-hidden pt-14">
         <Header />
-        {children}
+        <div className="overflow-y-auto h-full">{children}</div>
       </body>
     </html>
   );

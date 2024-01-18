@@ -1,40 +1,37 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { QuizType, WordType } from "../../types/result";
+import { useRef } from "react";
 import Article from "./article";
 import Quizzes from "./quizzes";
 import Words from "./words";
-import { useRouter } from "next/navigation";
+import { ArticleType } from "@/app/types/articles";
 
 export default function Result({
-  words,
-  quizzes,
-  en,
-  ko,
-  setKo,
+  article,
+  setArticle,
 }: {
-  words: WordType[];
-  quizzes: QuizType[];
-  en: string;
-  ko: string;
-  setKo: React.Dispatch<React.SetStateAction<string>>;
+  article: ArticleType;
+  setArticle: React.Dispatch<React.SetStateAction<ArticleType>>;
 }) {
-  const [loading, setLoading] = useState(false);
   const page = useRef<HTMLDivElement>(null);
 
-  const router = useRouter();
   return (
     <>
       <div className="w-full flex flex-col items-center gap-8" ref={page}>
-        <Words words={words} />
+        <Words words={article.words} />
         <Article
-          en={en}
-          ko={ko}
-          words={words.map((w) => w.word)}
-          setKo={setKo}
+          en={article.en}
+          ko={article.ko}
+          words={article.words.map((w) => w.word)}
+          setKo={(ko) =>
+            /* @ts-ignore */
+            setArticle((article) => ({
+              ...article,
+              ko,
+            }))
+          }
         />
-        <Quizzes quizzes={quizzes} />
+        <Quizzes quizzes={article.quizzes} />
       </div>
     </>
   );
