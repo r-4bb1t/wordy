@@ -17,10 +17,6 @@ export default function View({ article }: { article: ArticleType }) {
     english = converter.makeHtml(text).replace(/<h1.*?>.*?<\/h1>/g, ""),
     korean = converter.makeHtml(ko).replace(/<h1.*?>.*?<\/h1>/g, "");
 
-  const handlePDF = useCallback(async () => {
-    window.print();
-  }, []);
-
   return (
     <main className="flex flex-col items-center w-full gap-8 px-4 py-12 md:py-20 print:p-0 overflow-x-hidden">
       <div className="w-full flex flex-col items-center !bg-white max-w-5xl print:max-w-none">
@@ -67,14 +63,6 @@ export default function View({ article }: { article: ArticleType }) {
         </div>
         <Quizzes quizzes={quizzes} />
       </div>
-      <button
-        className="btn btn-primary btn-outline print:hidden"
-        onClick={() => {
-          handlePDF();
-        }}
-      >
-        PDF 다운로드
-      </button>
     </main>
   );
 }
