@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { auth } from "../../auth";
 import HeaderButtons from "./buttons";
 import { cookies } from "next/headers";
 
@@ -9,7 +8,6 @@ const getTheme = async () => {
 };
 
 export default async function Header() {
-  const session = await auth();
   const theme = await getTheme();
 
   return (
@@ -18,7 +16,7 @@ export default async function Header() {
         wordy
       </Link>
 
-      <HeaderButtons user={session?.user} theme={theme} />
+      <HeaderButtons theme={theme} />
     </header>
   );
 }

@@ -1,13 +1,14 @@
+import { GithubAuthProvider, signInWithRedirect } from "firebase/auth";
 import { IoLogoGithub } from "react-icons/io5";
-import { signIn } from "next-auth/react";
+import { auth } from "../lib/firebase/client";
 
 export default function SignIn() {
   return (
     <div className="bg-base-100 p-12">
       <button
-        className="btn btn-primary"
+        className="btn bg-[#333] text-white"
         onClick={() => {
-          signIn("github");
+          signInWithRedirect(auth, new GithubAuthProvider());
         }}
       >
         <IoLogoGithub />

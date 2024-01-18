@@ -1,11 +1,12 @@
 "use client";
 
-import { User } from "next-auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import SignIn from "../sign-in";
 import Modal from "../modal";
 import { toggle } from "./action";
+import { User, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/app/lib/firebase/client";
 
 const greet = () => {
   const hour = new Date().getHours();
@@ -14,14 +15,16 @@ const greet = () => {
   return "Good Evening";
 };
 
-export default function HeaderButtons({
-  user,
-  theme,
-}: {
-  user: User | undefined;
-  theme: "light" | "dark";
-}) {
+export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
   const [isOpenedSignIn, setIsOpenedSignIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) setUser(user);
+      else setUser(null);
+    });
+  }, []);
 
   return (
     <div className="flex items-center">
@@ -34,12 +37,13 @@ export default function HeaderButtons({
       {user ? (
         <button className="btn btn-ghost normal-case font-medium gap-0 pointer-events-none">
           <div className="hidden md:block">
-            {greet()},<span className="ml-1 !font-black">{user.name}</span>
+            {greet()},
+            <span className="ml-1 !font-black">{user.displayName}</span>
           </div>
           <div className="w-6 h-6 overflow-hidden rounded-full ml-2">
-            {user.image ? (
+            {user.photoURL ? (
               <img
-                src={user.image}
+                src={user.photoURL}
                 alt="user"
                 className="w-full h-full object-cover"
               />
