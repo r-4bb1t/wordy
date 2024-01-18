@@ -25,7 +25,7 @@ export default async function Home() {
           <li className="w-full" key={i}>
             <Link
               href={`/article/${article.id}`}
-              className="flex group w-full flex-col h-full overflow-hidden border bg-white"
+              className="flex group w-full flex-col h-full overflow-hidden border-primary/50 border"
             >
               <div className="w-full h-32 overflow-hidden shrink-0">
                 <img
@@ -33,16 +33,19 @@ export default async function Home() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
                 />
               </div>
-              <div className="p-4 group-hover:bg-black/5 transition-all h-[104px] flex flex-col justify-between">
+              <div className="p-4 group-hover:bg-black/5 transition-all h-28 flex flex-col justify-between border-primary/50 border-t">
                 <div className="line-clamp-2 w-full font-bold break-all h-full">
                   {article.title}
                 </div>
-                <div className="font-light text-gray-500 shrink-0 text-right">
-                  {isValid(new Date(article.createdAt!)) &&
-                    formatDistanceToNow(new Date(article.createdAt!), {
-                      locale: ko,
-                      addSuffix: true,
-                    })}
+                <div className="font-light opacity-80 shrink-0 flex justify-between items-center text-sm">
+                  <div>{article.author}</div>
+                  <div>
+                    {isValid(new Date(article.createdAt!)) &&
+                      formatDistanceToNow(new Date(article.createdAt!), {
+                        locale: ko,
+                        addSuffix: true,
+                      })}
+                  </div>
                 </div>
               </div>
             </Link>
