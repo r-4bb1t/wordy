@@ -9,10 +9,7 @@ import Showdown from "showdown";
 export default function View({ article }: { article: ArticleType }) {
   const { title, en, ko, words, quizzes } = article;
   const converter = new Showdown.Converter(),
-    text = emphasize(
-      en,
-      words.map((w) => w.word)
-    ),
+    text = emphasize(en, words),
     english = converter.makeHtml(text).replace(/<h1.*?>.*?<\/h1>/g, ""),
     korean = converter.makeHtml(ko).replace(/<h1.*?>.*?<\/h1>/g, "");
 
@@ -23,8 +20,12 @@ export default function View({ article }: { article: ArticleType }) {
   return (
     <main className="flex flex-col items-center w-full gap-8 px-4 py-12 print:p-0">
       <div className="w-full flex flex-col items-center !bg-white max-w-5xl print:max-w-none">
-        <div className="w-full text-3xl font-black before:content-['#'] before:mr-1 before:text-primary">
-          {title}
+        <div className="p-6 flex flex-col items-center">
+          <div className="w-16 h-1 mb-4 rounded-full bg-primary" />
+          <div className="text-3xl font-black text-center px-24">{title}</div>
+        </div>
+        <div className="w-full h-48 rounded-xl overflow-hidden mb-4">
+          <img src={article.image} className="w-full h-full object-cover" />
         </div>
         <div className="w-full text-2xl font-bold text-primary border-l-4 border-l-primary pl-4 my-6">
           Words in contents

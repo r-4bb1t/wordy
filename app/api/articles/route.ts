@@ -24,10 +24,12 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { title, en, ko, words, quizzes }: ArticleType = await request.json();
+  const { title, image, en, ko, words, quizzes }: ArticleType =
+    await request.json();
 
   const newDoc = await addDoc(collection(db, "article"), {
     title,
+    image,
     en,
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),
