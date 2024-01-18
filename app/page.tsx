@@ -19,9 +19,9 @@ export default async function Home() {
   const articles = await getData();
 
   return (
-    <div className="w-full h-screen bg-white flex flex-col items-center p-12">
+    <div className="w-full h-screen bg-base-200 flex flex-col items-center px-6 py-12 md:px-12">
       <Header />
-      <ul className="w-full py-2 gap-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-12">
+      <ul className="w-full py-2 gap-4 md:gap-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-12">
         {articles.map((article, i) => (
           <li className="w-full" key={i}>
             <Link
