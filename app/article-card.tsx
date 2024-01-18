@@ -12,11 +12,14 @@ export default function ArticleCard({ article }: { article: ArticleType }) {
       href={`/article/${article.id}`}
       className="flex group w-full h-full overflow-hidden hover:bg-base-200/80 p-4 rounded-xl"
     >
-      <div className="w-24 h-24 md:w-32 md:h-32 overflow-hidden shrink-0 rounded-xl">
+      <div className="relative w-24 h-24 md:w-32 md:h-32 overflow-hidden shrink-0 rounded-xl">
         <img
           src={article.image}
           className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300 "
         />
+        <div className="absolute top-2 left-2 font-black capitalize bg-white rounded-full px-2 text-xs py-0.5">
+          {article.category}
+        </div>
       </div>
       <div className="px-4 py-0.5 transition-all flex flex-col justify-between h-full">
         <div>

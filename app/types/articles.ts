@@ -11,4 +11,13 @@ export interface ArticleType {
   createdAt: string | null;
   url: string;
   author: string;
+  category: CategoryType;
 }
+
+export type CategoryType =
+  | "tech"
+  | "health"
+  | "business"
+  | "science"
+  | "sports"
+  | "entertainment";

@@ -25,7 +25,9 @@ export default function View({ article }: { article: ArticleType }) {
     <main className="flex flex-col items-center w-full gap-8 px-4 py-12 md:py-20 print:p-0 overflow-x-hidden">
       <div className="w-full flex flex-col items-center !bg-white max-w-5xl print:max-w-none">
         <div className="p-6 flex flex-col items-center">
-          <div className="w-16 h-1 mb-4 bg-primary" />
+          <div className="mb-2 capitalize font-black text-lg">
+            {article.category}
+          </div>
           <div className="text-3xl font-black text-center px-0 md:px-12 lg:px-24">
             {title}
           </div>
@@ -37,6 +39,7 @@ export default function View({ article }: { article: ArticleType }) {
             {author}
             <IoIosLink />
           </Link>
+          <div className="w-12 h-0.5 my-4 bg-primary" />
         </div>
         <div className="w-full h-48 overflow-hidden rounded-xl">
           <img src={article.image} className="w-full h-full object-cover" />
