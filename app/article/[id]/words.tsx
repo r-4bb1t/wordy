@@ -8,28 +8,18 @@ export default function Words({ words }: { words: WordType[] }) {
           key={i}
           className="grid md:grid-cols-[200px_1fr] break-inside-avoid"
         >
-          <div className="font-black text-primary text-base md:text-lg lg:text-xl flex md:items-center px-4 py-2 gap-4 border-t-4 border-t-primary !bg-base-200">
+          <div className="font-black text-primary text-base md:text-lg flex md:flex-col px-4 py-2 gap-4 md:gap-0 border-t-4 border-t-primary !bg-base-200">
             {word.word}
-            <div className="font-medium md:hidden">
+            <div className="font-medium text-base">
               <span className="text-primary">
                 {word.meaning.split(". ")[0] + ". "}
               </span>
               {word.meaning.split(". ")[1]}
             </div>
           </div>
-          <div className="flex flex-col gap-1 px-4 border-t border-t-base-300 py-3 md:py-2">
-            <div className="font-medium hidden md:block">
-              <span className="text-primary">
-                {word.meaning.split(". ")[0] + ". "}
-              </span>
-              {word.meaning.split(". ")[1]}
-            </div>
-            <div className="text-sm md:text-xs font-medium">
-              {word.exampleSentence.sentence}
-            </div>
-            <div className="text-sm md:text-xs text-black/80">
-              {word.exampleSentence.meaning}
-            </div>
+          <div className="flex flex-col gap-1 px-4 border-t border-t-base-300 py-3 md:py-2 justify-center">
+            <div className="font-medium">{word.exampleSentence.sentence}</div>
+            <div className="opacity-80">{word.exampleSentence.meaning}</div>
           </div>
         </li>
       ))}
