@@ -20,7 +20,7 @@ export default function ArticleCard({ article }: { article: ArticleType }) {
       </div>
       <div className="px-4 py-0.5 transition-all flex flex-col justify-between h-full">
         <div>
-          <div className="line-clamp-3 w-full font-bold break-all">
+          <div className="line-clamp-2 w-full font-bold break-all">
             {article.title}
           </div>
           <div className="hidden md:line-clamp-2 opacity-80 text-sm mt-1">
