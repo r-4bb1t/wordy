@@ -76,6 +76,7 @@
 
 .markdown-body p {
   margin-bottom: 4px !important;
+  line-height: 1.8 !important;
 }
 
 .markdown-body a {
