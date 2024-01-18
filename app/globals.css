@@ -52,6 +52,11 @@
   box-shadow: none !important;
 }
 
+[data-color-mode="dark"] .w-md-editor,
+[data-color-mode="dark"] .w-md-editor-toolbar {
+  background-color: transparent !important;
+}
+
 .w-md-editor-input * {
   font-family: var(--md-editor-font-family) !important;
 }

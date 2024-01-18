@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 
 const getTheme = async () => {
   const theme = cookies().get("theme")?.value || "light";
-  if (theme === "light") return "lofi";
-  return "ifol";
+  return theme as "light" | "dark";
 };
 
 export default async function RootLayout({
@@ -22,7 +21,11 @@ export default async function RootLayout({
   const theme = await getTheme();
 
   return (
-    <html lang="ko" data-theme={theme}>
+    <html
+      lang="ko"
+      data-theme={theme === "light" ? "lofi" : "ifol"}
+      data-color-mode={theme}
+    >
       <body className="h-[100dvh] overflow-y-hidden pt-16 flex flex-col bg-base-100 text-base-content transition-colors">
         <Header />
         <div className="overflow-y-auto h-full">{children}</div>

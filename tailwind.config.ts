@@ -22,6 +22,7 @@ const config: Config = {
         ifol: {
           ...require("daisyui/src/theming/themes")["[data-theme=lofi]"],
           primary: "#ffffff",
+          "primary-content": "#111111",
           secondary: "#ffffff",
           accent: "#ffffff",
           neutral: "#ffffff",
