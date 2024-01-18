@@ -49,8 +49,8 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
             {user.photoURL ? (
               <img
                 src={user.photoURL}
-                alt="user"
                 className="w-full h-full object-cover"
+                alt="user profile"
               />
             ) : (
               <IoPersonCircleOutline size={24} />

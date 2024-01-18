@@ -38,7 +38,11 @@ export default function View({ article }: { article: ArticleType }) {
           <div className="w-12 h-0.5 my-4 bg-primary" />
         </div>
         <div className="w-full h-52 overflow-hidden rounded-xl">
-          <img src={article.image} className="w-full h-full object-cover" />
+          <img
+            src={article.image}
+            className="w-full h-full object-cover"
+            alt=""
+          />
         </div>
         <div className="w-full text-2xl font-bold text-primary border-l-4 border-l-primary pl-4 my-10">
           Words in contents

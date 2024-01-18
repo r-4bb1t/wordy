@@ -16,6 +16,7 @@ export default function ArticleCard({ article }: { article: ArticleType }) {
         <img
           src={article.image}
           className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300 "
+          alt=""
         />
         <div className="absolute top-2 left-2 font-black capitalize bg-base-100 text-primary rounded-full px-2 text-xs py-0.5">
           {article.category}

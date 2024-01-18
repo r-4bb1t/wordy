@@ -117,7 +117,11 @@ export default function Input({
         </div>
       </div>
       <div className="w-full h-64 overflow-hidden border-primary border">
-        <img className="w-full h-full object-cover" src={article.image} />
+        <img
+          className="w-full h-full object-cover"
+          src={article.image}
+          alt=""
+        />
       </div>
       <div className="w-full border border-primary overflow-hidden">
         <MDEditor
