@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /wordy
+            cd ~/wordy
             git pull
             sudo pnpm install
             sudo pnpm run build && pm2 restart ../ecosystem.config.js
