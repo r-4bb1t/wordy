@@ -1,0 +1,36 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+      - name: Install dependencies
+        run: npm install
+  
+      - name: Build Next.js app
+        run: npm run build
+  
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /wordy
+            git pull
+            sudo pnpm install
+            sudo pnpm run build
+            pm2 restart ../ecosystem.config.js
