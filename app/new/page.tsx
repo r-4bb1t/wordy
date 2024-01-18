@@ -13,6 +13,9 @@ export default function Home() {
         words: [],
         quizzes: [],
         createdAt: null,
+        author: "",
+        category: "tech",
+        url: "",
       }}
     />
   );
