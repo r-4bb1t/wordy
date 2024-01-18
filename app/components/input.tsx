@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import { ArticleType } from "../types/articles";
+import { ArticleType, CATEGORY_LIST, CategoryType } from "../types/articles";
 
 export default function Input({
   article,
@@ -56,20 +56,38 @@ export default function Input({
   return (
     <div className="w-full flex flex-col max-w-5xl items-center gap-4">
       <div className="w-full">
-        <h1 className="text-lg font-bold mb-2">Title</h1>
-        <input
-          className="input input-lg w-full input-primary input-bordered font-bold"
-          placeholder="title"
-          value={article.title}
-          onChange={(e) =>
-            setArticle((article) => ({ ...article, title: e.target.value }))
-          }
-        />
+        <h1 className="text-lg font-bold mb-2">Category & Title</h1>
+        <div className="grid grid-cols-[1fr_5fr] gap-4">
+          <select
+            className="select select-primary capitalize"
+            value={article.category}
+            onChange={(e) =>
+              setArticle((article) => ({
+                ...article,
+                category: e.target.value as CategoryType,
+              }))
+            }
+          >
+            {CATEGORY_LIST.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+          <input
+            className="input w-full input-primary font-bold"
+            placeholder="title"
+            value={article.title}
+            onChange={(e) =>
+              setArticle((article) => ({ ...article, title: e.target.value }))
+            }
+          />
+        </div>
       </div>
       <div className="w-full">
         <h1 className="text-lg font-bold mb-2">Cover Image URL</h1>
         <input
-          className="input w-full input-primary input-bordered"
+          className="input w-full input-primary"
           placeholder="image"
           value={article.image}
           onChange={(e) =>
@@ -78,10 +96,10 @@ export default function Input({
         />
       </div>
       <div className="w-full">
-        <h1 className="text-lg font-bold mb-2">Author&Original URL</h1>
+        <h1 className="text-lg font-bold mb-2">Author & Original URL</h1>
         <div className="grid grid-cols-[1fr_2fr] gap-4">
           <input
-            className="input w-full input-primary input-bordered"
+            className="input w-full input-primary"
             placeholder="author"
             value={article.author}
             onChange={(e) =>
@@ -89,7 +107,7 @@ export default function Input({
             }
           />
           <input
-            className="input w-full input-primary input-bordered"
+            className="input w-full input-primary"
             placeholder="url"
             value={article.url}
             onChange={(e) =>

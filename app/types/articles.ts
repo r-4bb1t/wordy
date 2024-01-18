@@ -21,3 +21,12 @@ export type CategoryType =
   | "science"
   | "sports"
   | "entertainment";
+
+  export const CATEGORY_LIST: CategoryType[] = [
+    "tech",
+    "health",
+    "business",
+    "science",
+    "sports",
+    "entertainment",
+  ];
