@@ -1,3 +1,1 @@
-export const DEFAULT_ARTICLE = `# Title
-
-contents`;
+export const DEFAULT_ARTICLE = `contents`;

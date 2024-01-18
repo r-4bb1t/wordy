@@ -22,7 +22,9 @@ export default function View({ article }: { article: ArticleType }) {
       <div className="w-full flex flex-col items-center !bg-white max-w-5xl print:max-w-none">
         <div className="p-6 flex flex-col items-center">
           <div className="w-16 h-1 mb-4 rounded-full bg-primary" />
-          <div className="text-3xl font-black text-center px-24">{title}</div>
+          <div className="text-3xl font-black text-center px-6 md:px-12 lg:px-24">
+            {title}
+          </div>
         </div>
         <div className="w-full h-48 rounded-xl overflow-hidden mb-4">
           <img src={article.image} className="w-full h-full object-cover" />

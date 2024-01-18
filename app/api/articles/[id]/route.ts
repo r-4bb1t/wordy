@@ -40,6 +40,7 @@ export async function PATCH(
     await request.json();
 
   const docRef = doc(db, "article", params.id);
+
   await setDoc(docRef, {
     title,
     image,
@@ -47,8 +48,7 @@ export async function PATCH(
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),
     quizzes,
-    createdAt:
-      getDoc(docRef).then((doc) => doc.data()?.createdAt) || Timestamp.now(),
+    createdAt: Timestamp.now(),
   });
 
   return Response.json({ article: { en, ko, words, quizzes } });
