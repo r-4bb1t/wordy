@@ -31,13 +31,14 @@ export default function View({ article }: { article: ArticleType }) {
           </div>
           <Link
             href={url}
+            target="_blank"
             className="mt-2 text-black/80 flex items-center gap-2"
           >
             {author}
             <IoIosLink />
           </Link>
         </div>
-        <div className="w-full h-48 overflow-hidden">
+        <div className="w-full h-48 overflow-hidden rounded-xl">
           <img src={article.image} className="w-full h-full object-cover" />
         </div>
         <div className="w-full text-2xl font-bold text-primary border-l-4 border-l-primary pl-4 my-10">
