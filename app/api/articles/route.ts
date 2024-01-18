@@ -6,10 +6,14 @@ import {
   collection,
   doc,
   getDocs,
+  orderBy,
+  query,
 } from "firebase/firestore";
 
 export async function GET(request: Request) {
-  const articlesSnap = await getDocs(collection(db, "article"));
+  const articlesRef = collection(db, "article");
+  const q = query(articlesRef, orderBy("createdAt", "desc"));
+  const articlesSnap = await getDocs(q);
 
   return Response.json({
     articles: articlesSnap.docs.map((doc) => {
