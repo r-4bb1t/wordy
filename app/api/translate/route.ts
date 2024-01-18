@@ -5,6 +5,7 @@ export async function POST(request: Request) {
     headers: {
       Authorization: "DeepL-Auth-Key " + process.env.DEEPL_AUTH_KEY,
       "Content-Type": "application/json",
+      credentials: "include",
     },
     body: JSON.stringify({
       target_lang: "ko",

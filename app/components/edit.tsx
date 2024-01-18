@@ -34,6 +34,7 @@ export default function Edit({
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            credentials: "include",
           },
           body: JSON.stringify(article),
           cache: "no-store",

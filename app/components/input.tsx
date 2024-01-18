@@ -21,6 +21,7 @@ export default function Input({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        credentials: "include",
       },
       body: JSON.stringify({ text: article.en }),
       cache: "no-store",
@@ -34,6 +35,7 @@ export default function Input({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        credentials: "include",
       },
       body: JSON.stringify({ article: article.en }),
       cache: "no-store",

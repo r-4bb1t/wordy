@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { User } from "firebase/auth";
+import { UserType } from "../types/user";
 
 export interface UserStore {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  user: UserType | null;
+  setUser: (user: UserType | null) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({

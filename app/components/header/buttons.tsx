@@ -1,6 +1,5 @@
 "use client";
 
-import { IoPersonCircleOutline } from "react-icons/io5";
 import SignIn from "../sign-in";
 import Modal from "../modal";
 import Darkmode from "./darkmode";
@@ -8,46 +7,32 @@ import { useUserStore } from "@/app/store/user-store";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/lib/firebase/client";
-
-const greet = () => {
-  const hour = new Date().getHours();
-  if (hour >= 4 && hour <= 11) return "Good Morning";
-  if (hour >= 12 && hour <= 17) return "Good Afternoon";
-  return "Good Evening";
-};
+import { useAuthFirebase } from "@/app/hooks/use-auth-firebase";
+import UserButton from "./user-button";
 
 export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
   const [isOpenedSignIn, setIsOpenedSignIn] = useState(false);
   const { user, setUser } = useUserStore();
+  const { handleUser } = useAuthFirebase();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      handleUser(user);
     });
     return () => unsubscribe();
-  }, [setUser]);
+  }, [setUser, handleUser]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      handleUser(user);
+    });
+  }, [handleUser]);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-4">
       <Darkmode theme={theme} />
       {user ? (
-        <button className="btn btn-ghost normal-case font-medium gap-0 pointer-events-none">
-          <div className="hidden md:block">
-            {greet()},
-            <span className="ml-1 !font-black">{user.displayName}</span>
-          </div>
-          <div className="w-6 h-6 overflow-hidden rounded-full ml-2">
-            {user.photoURL ? (
-              <img
-                src={user.photoURL}
-                className="w-full h-full object-cover"
-                alt="user profile"
-              />
-            ) : (
-              <IoPersonCircleOutline size={24} />
-            )}
-          </div>
-        </button>
+        <UserButton user={user} />
       ) : (
         <button
           className="btn btn-ghost normal-case font-black"
