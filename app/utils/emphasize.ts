@@ -8,7 +8,7 @@ export const emphasize = (text: string, words: WordType[]) => {
   );
   const t = text.replace(
     regex,
-    `<span class="highlight"><div class="ttip">$1</div>$1</span>`
+    `<span class="highlight"><span class="ttip">$1</span>$1</span>`
   );
   // find all the words in the text and append the tooltip
   const $ = load(t);
