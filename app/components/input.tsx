@@ -70,23 +70,29 @@ export default function Input({
   }, [makeWords, translate]);
 
   return (
-    <div className="w-full flex flex-col max-w-5xl items-center gap-8">
-      <input
-        className="input input-lg w-full input-primary input-bordered font-bold"
-        placeholder="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        className="input w-full input-primary input-bordered"
-        placeholder="image"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-      />
-      <div className="w-full h-64 overflow-hidden rounded-lg border-primary border">
+    <div className="w-full flex flex-col max-w-5xl items-center gap-4">
+      <div className="w-full">
+        <h1 className="text-lg font-bold mb-2">Title</h1>
+        <input
+          className="input input-lg w-full input-primary input-bordered font-bold"
+          placeholder="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className="w-full">
+        <h1 className="text-lg font-bold mb-2">Cover Image URL</h1>
+        <input
+          className="input w-full input-primary input-bordered"
+          placeholder="image"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+        />
+      </div>
+      <div className="w-full h-64 overflow-hidden border-primary border">
         <img className="w-full h-full object-cover" src={image} />
       </div>
-      <div className="w-full border border-primary rounded-xl overflow-hidden">
+      <div className="w-full border border-primary overflow-hidden">
         <MDEditor
           value={en}
           // @ts-ignore

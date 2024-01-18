@@ -19,13 +19,13 @@ export default async function Home() {
   const articles = await getData();
 
   return (
-    <div className="w-full h-screen bg-base-200 flex flex-col items-center px-6 py-12 md:px-12">
+    <div className="w-full h-screen flex flex-col items-center px-6 py-12 md:px-12">
       <ul className="w-full py-2 gap-4 md:gap-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-12">
         {articles.map((article, i) => (
           <li className="w-full" key={i}>
             <Link
               href={`/article/${article.id}`}
-              className="flex group w-full flex-col h-full rounded-xl overflow-hidden border bg-white"
+              className="flex group w-full flex-col h-full overflow-hidden border bg-white"
             >
               <div className="w-full h-32 overflow-hidden shrink-0">
                 <img
@@ -33,7 +33,7 @@ export default async function Home() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
                 />
               </div>
-              <div className="p-4 group-hover:bg-black/5 transition-all h-full flex flex-col">
+              <div className="p-4 group-hover:bg-black/5 transition-all h-[104px] flex flex-col justify-between">
                 <div className="line-clamp-2 w-full font-bold break-all h-full">
                   {article.title}
                 </div>

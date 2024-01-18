@@ -20,11 +20,11 @@ export default function View({ article }: { article: ArticleType }) {
   }, []);
 
   return (
-    <main className="flex flex-col items-center w-full gap-8 px-4 py-24 print:p-0">
+    <main className="flex flex-col items-center w-full gap-8 px-4 py-16 md:py-24 print:p-0">
       <div className="w-full flex flex-col items-center !bg-white max-w-5xl print:max-w-none">
         <div className="p-6 flex flex-col items-center">
           <div className="w-16 h-1 mb-4 bg-primary" />
-          <div className="text-3xl font-black text-center px-4 md:px-12 lg:px-24">
+          <div className="text-3xl font-black text-center px-0 md:px-12 lg:px-24">
             {title}
           </div>
         </div>

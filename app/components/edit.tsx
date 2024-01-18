@@ -68,7 +68,7 @@ export default function Edit({
   }, [en, ko, quizzes, router, words]);
 
   return (
-    <main className="flex flex-col items-center w-full gap-8 px-4 py-12">
+    <main className="flex flex-col items-center w-full gap-8 px-4 py-16 md:py-24">
       <Input
         setWords={setWords}
         en={en}

@@ -2,7 +2,7 @@ import { WordType } from "@/app/types/result";
 
 export default function Words({ words }: { words: WordType[] }) {
   return (
-    <ul className="w-full text-sm rounded-xl bg-white">
+    <ul className="w-full text-sm bg-white">
       {words.map((word, i) => (
         <li
           key={i}

@@ -10,7 +10,7 @@ export default function Article({
   setKo: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
-    <div className="w-full max-w-5xl rounded-xl bg-white border border-primary p-8 flex flex-col gap-4">
+    <div className="w-full max-w-5xl bg-white border border-primary p-8 flex flex-col gap-4">
       <MDEditor
         value={ko}
         // @ts-ignore
