@@ -5,6 +5,7 @@ import { useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import SignIn from "../sign-in";
 import Modal from "../modal";
+import { toggle } from "./action";
 
 const greet = () => {
   const hour = new Date().getHours();
@@ -13,14 +14,28 @@ const greet = () => {
   return "Good Evening";
 };
 
-export default function HeaderButtons({ user }: { user: User | undefined }) {
+export default function HeaderButtons({
+  user,
+  theme,
+}: {
+  user: User | undefined;
+  theme: "light" | "dark";
+}) {
   const [isOpenedSignIn, setIsOpenedSignIn] = useState(false);
 
   return (
-    <>
+    <div className="flex items-center">
+      <input
+        type="checkbox"
+        className="toggle toggle-sm !transition-all"
+        checked={theme === "dark"}
+        onChange={async () => toggle()}
+      />
       {user ? (
         <button className="btn btn-ghost normal-case font-medium gap-0 pointer-events-none">
-          {greet()},<span className="ml-1 !font-black">{user.name}</span>
+          <div className="hidden md:block">
+            {greet()},<span className="ml-1 !font-black">{user.name}</span>
+          </div>
           <div className="w-6 h-6 overflow-hidden rounded-full ml-2">
             {user.image ? (
               <img
@@ -44,6 +59,6 @@ export default function HeaderButtons({ user }: { user: User | undefined }) {
       <Modal opened={isOpenedSignIn} close={() => setIsOpenedSignIn(false)}>
         <SignIn />
       </Modal>
-    </>
+    </div>
   );
 }

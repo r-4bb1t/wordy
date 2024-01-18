@@ -2,7 +2,7 @@ import { QuizType } from "@/app/types/result";
 
 export default function Quizzes({ quizzes }: { quizzes: QuizType[] }) {
   return (
-    <ol className="w-full max-w-5xl p-12 flex flex-col gap-4 text-sm border-primary border bg-white">
+    <ol className="w-full max-w-5xl p-12 flex flex-col gap-4 text-sm border-primary border bg-base-100">
       {quizzes.map((quiz, i) => (
         <li key={i} className="flex flex-col gap-3">
           <div className="font-bold">

@@ -16,7 +16,26 @@ const config: Config = {
     },
   },
   daisyui: {
-    themes: ["lofi"],
+    themes: [
+      "lofi",
+      {
+        ifol: {
+          ...require("daisyui/src/theming/themes")["[data-theme=lofi]"],
+          primary: "#ffffff",
+          secondary: "#ffffff",
+          accent: "#ffffff",
+          neutral: "#ffffff",
+          "base-100": "#111111",
+          "base-200": "#222222",
+          "base-300": "#333333",
+          "base-content": "#eeeeee",
+          info: "#ffffff",
+          success: "#ffffff",
+          warning: "#ffffff",
+          error: "#ffffff",
+        },
+      },
+    ],
   },
   plugins: [require("daisyui")],
 };

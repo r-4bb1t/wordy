@@ -41,7 +41,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: black;
+  background-color: --var(--p);
 }
 
 *::-webkit-scrollbar-track {
@@ -76,6 +76,10 @@
 
 .wmde-markdown p {
   margin-bottom: 8px !important;
+}
+
+.markdown-body h2 {
+  border-bottom: 1px solid var(--p) !important;
 }
 
 .markdown-body p {
