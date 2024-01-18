@@ -47,7 +47,8 @@ export async function PATCH(
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),
     quizzes,
-    createdAt: new Date(),
+    createdAt:
+      getDoc(docRef).then((doc) => doc.data()?.createdAt) || Timestamp.now(),
   });
 
   return Response.json({ article: { en, ko, words, quizzes } });

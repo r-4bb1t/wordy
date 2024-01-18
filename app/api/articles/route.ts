@@ -34,8 +34,8 @@ export async function POST(request: Request) {
     ko,
     words: words.map((word) => doc(db, "word/" + word.word)),
     quizzes,
-    createdAt: new Date(),
+    createdAt: Timestamp.now(),
   });
 
-  return Response.json({ article: { en, ko, words, quizzes, id: newDoc.id } });
+  return Response.json({ en, ko, words, quizzes, id: newDoc.id });
 }
