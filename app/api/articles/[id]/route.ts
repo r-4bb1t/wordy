@@ -36,20 +36,15 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { title, image, en, ko, words, quizzes }: ArticleType =
-    await request.json();
+  const article: ArticleType = await request.json();
 
   const docRef = doc(db, "article", params.id);
 
   await setDoc(docRef, {
-    title,
-    image,
-    en,
-    ko,
-    words: words.map((word) => doc(db, "word/" + word.word)),
-    quizzes,
+    ...article,
+    words: article.words.map((word) => doc(db, "word/" + word.word)),
     createdAt: Timestamp.now(),
   });
 
-  return Response.json({ article: { en, ko, words, quizzes } });
+  return Response.json({ article });
 }

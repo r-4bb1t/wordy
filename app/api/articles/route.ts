@@ -28,18 +28,13 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { title, image, en, ko, words, quizzes }: ArticleType =
-    await request.json();
+  const article: ArticleType = await request.json();
 
   const newDoc = await addDoc(collection(db, "article"), {
-    title,
-    image,
-    en,
-    ko,
-    words: words.map((word) => doc(db, "word/" + word.word)),
-    quizzes,
+    ...article,
+    words: article.words.map((word) => doc(db, "word/" + word.word)),
     createdAt: Timestamp.now(),
   });
 
-  return Response.json({ en, ko, words, quizzes, id: newDoc.id });
+  return Response.json({ ...article, id: newDoc.id });
 }

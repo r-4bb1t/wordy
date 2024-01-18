@@ -3,7 +3,6 @@
 import Result from "./result";
 import Input from "./input";
 import { useCallback, useState } from "react";
-import { QuizType, WordType } from "../types/result";
 import { ArticleType } from "../types/articles";
 import { useRouter } from "next/navigation";
 
@@ -52,25 +51,25 @@ export default function Edit({
     <main className="flex flex-col items-center w-full gap-8 px-4 py-12 md:py-20">
       <Input article={article} setArticle={setArticle} />
 
-      <div className="w-full flex flex-col items-center gap-8">
-        {article.words.length > 0 && (
+      {article.words.length > 0 && (
+        <div className="w-full flex flex-col items-center gap-8">
           <Result article={article} setArticle={setArticle} />
-        )}
-        <button
-          className="btn btn-primary"
-          onClick={() => handleSave()}
-          disabled={loading}
-        >
-          {loading ? (
-            <>
-              <div className="loading loading-spinner" />
-              저장
-            </>
-          ) : (
-            "저장"
-          )}
-        </button>
-      </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleSave()}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <div className="loading loading-spinner" />
+                저장
+              </>
+            ) : (
+              "저장"
+            )}
+          </button>
+        </div>
+      )}
     </main>
   );
 }

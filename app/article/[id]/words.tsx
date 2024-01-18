@@ -6,7 +6,7 @@ export default function Words({ words }: { words: WordType[] }) {
       {words.map((word, i) => (
         <li
           key={i}
-          className="grid md:grid-cols-[200px_1fr] break-inside-avoid"
+          className="grid md:grid-cols-[250px_1fr] break-inside-avoid"
         >
           <div className="font-black text-primary text-base md:text-lg flex md:flex-col px-4 py-2 gap-4 md:gap-0 border-t-4 border-t-primary !bg-base-200">
             {word.word}

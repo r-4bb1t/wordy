@@ -36,16 +36,16 @@
   font-family: "SUIT";
 }
 
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   width: 4px;
 }
 
-*::-webkit-scrollbar-thumb{
+*::-webkit-scrollbar-thumb {
   background-color: black;
 }
 
-*::-webkit-scrollbar-track{
-  background-color: rgba(0,0,0,0);
+*::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .w-md-editor {
@@ -67,6 +67,11 @@
 .wmde-markdown ul,
 .markdown-body ul {
   list-style-type: disc !important;
+}
+
+.wmde-markdown ol,
+.markdown-body ol {
+  list-style-type: decimal !important;
 }
 
 .wmde-markdown p {
