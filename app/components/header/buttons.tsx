@@ -20,10 +20,11 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const handleAuthStateChanged = onAuthStateChanged(auth, (user) => {
       if (user) setUser(user);
       else setUser(null);
     });
+    return () => handleAuthStateChanged();
   }, []);
 
   return (
@@ -61,7 +62,7 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
         </button>
       )}
       <Modal opened={isOpenedSignIn} close={() => setIsOpenedSignIn(false)}>
-        <SignIn />
+        <SignIn close={() => setIsOpenedSignIn(false)} />
       </Modal>
     </div>
   );
