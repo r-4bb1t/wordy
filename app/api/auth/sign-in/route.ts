@@ -1,4 +1,5 @@
 import { db } from "@/app/lib/firebase/admin";
+import { UserType } from "@/app/types/user";
 import { User } from "firebase/auth";
 
 export async function POST(request: Request, response: Response) {
@@ -13,12 +14,13 @@ export async function POST(request: Request, response: Response) {
     return response;
   }
 
-  const user = {
+  const user: UserType = {
     id: rawUserData.uid,
     email: rawUserData.email,
     username: rawUserData.displayName,
     image: rawUserData.photoURL,
     provider: rawUserData.providerData[0].providerId,
+    role: "user",
   };
 
   docRef.set(user);

@@ -1,7 +1,8 @@
 export interface UserType {
-  uid: string;
-  email: string;
-  username: string;
-  image: string;
+  id: string;
+  email: string | null;
+  username: string | null;
+  image: string | null;
   provider: string;
+  role: string;
 }
