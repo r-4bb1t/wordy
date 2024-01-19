@@ -1,5 +1,5 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 export const firebaseConfig = {
@@ -17,10 +17,33 @@ export const db = getFirestore(app);
 
 export const auth = getAuth(app);
 
+const providers = {
+  github: new GithubAuthProvider(),
+};
+
+export const signIn = async (provider: "github") => {
+  const rawUserData = (await signInWithPopup(auth, providers[provider])).user;
+  if (!rawUserData) {
+    throw new Error("No user data returned");
+  }
+  const user = await (
+    await fetch(`/api/auth/sign-in`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(rawUserData),
+      cache: "no-store",
+    })
+  ).json();
+
+  return user;
+};
+
 export async function signOut() {
   try {
     return auth.signOut();
   } catch (error) {
-    console.error("Error signing out with Google", error);
+    console.error("Error signing out", error);
   }
 }

@@ -9,9 +9,7 @@ export async function POST(request: Request, response: Response) {
   const doc = await docRef.get();
 
   if (doc.exists) {
-    const response = Response.json(doc.data());
-
-    return response;
+    return Response.json(doc.data());
   }
 
   const user: UserType = {

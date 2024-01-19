@@ -4,7 +4,8 @@ import { DocumentReference } from "firebase/firestore";
 import { NextRequest } from "next/server";
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const doc = await db.doc("article/" + params.id).get();
+  const docRef = db.doc(`article/${params.id}`);
+  const doc = await docRef.get();
 
   if (doc.exists) {
     const article = doc.data()!;

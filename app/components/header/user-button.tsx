@@ -1,11 +1,7 @@
 "use client";
 
 import { UserType } from "@/app/types/user";
-import {
-  IoLogOut,
-  IoLogOutOutline,
-  IoPersonCircleOutline,
-} from "react-icons/io5";
+import { IoLogOutOutline, IoPersonCircleOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { signOut } from "@/app/lib/firebase/client";
@@ -22,7 +18,6 @@ export default function UserButton({ user }: { user: UserType }) {
 
   const handleSignOut = async () => {
     await signOut();
-    await fetch("/api/auth/sign-out");
   };
 
   return (

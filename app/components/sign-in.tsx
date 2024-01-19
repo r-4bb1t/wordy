@@ -1,23 +1,22 @@
-import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { IoLogoGithub } from "react-icons/io5";
-import { auth } from "../lib/firebase/client";
+import { signIn } from "../lib/firebase/client";
 import { useCallback, useState } from "react";
-import { useAuthFirebase } from "../hooks/use-auth-firebase";
+import { useUserStore } from "../store/user-store";
 
 export default function SignIn({ close }: { close: () => void }) {
   const [error, setError] = useState<string | null>(null);
-  const { handleUser } = useAuthFirebase();
+  const { setUser } = useUserStore();
 
   const handleSignIn = useCallback(async () => {
-    const res = await signInWithPopup(auth, new GithubAuthProvider());
-    if (res.user) {
-      await handleUser(res.user);
+    const user = await signIn("github");
+    if (user) {
+      setUser(user);
       setError(null);
       close();
       return;
     }
     setError("Failed to sign in");
-  }, [close, handleUser]);
+  }, [close, setError]);
 
   return (
     <div className="bg-base-100 p-12">

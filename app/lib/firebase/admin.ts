@@ -1,10 +1,10 @@
 import "server-only";
 
-import { apps, initializeApp, auth, firestore } from "firebase-admin";
+import * as admin from "firebase-admin";
 import { cert } from "firebase-admin/app";
 
-if (!apps.length) {
-  initializeApp({
+if (!admin.apps.length) {
+  admin.initializeApp({
     credential: cert({
       projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
@@ -14,11 +14,5 @@ if (!apps.length) {
   });
 }
 
-export const db = firestore();
-export const adminAuth = auth();
-
-export const revokeAllSessions = async (session: string) => {
-  const decodedIdToken = await adminAuth.verifySessionCookie(session);
-
-  return await adminAuth.revokeRefreshTokens(decodedIdToken.sub);
-};
+export const db = admin.firestore();
+export const adminAuth = admin.auth();
