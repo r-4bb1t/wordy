@@ -8,7 +8,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export async function POST (request: Request) {
   const { article } = await request.json();
 
-  /* const completion = await openai.chat.completions.create({
+  const completion = await openai.chat.completions.create({
     messages: [
       {
         role: "system",
@@ -26,21 +26,8 @@ export async function POST (request: Request) {
   const json: ResponseType = JSON.parse(answer[0] || "null") || {
     words: [],
     quizzes: [],
-  }; */
-
-  const json = {
-    words: [
-      {
-        word: "unprecedented",
-        meaning: "adj. 이전에 없던, 전례 없는, 새로운",
-        exampleSentence: {
-          sentence:
-            "The government took the unprecedented step of releasing confidential correspondence.",
-          meaning: "정부는 기밀 서신을 공개하는 전례 없는 조치를 취했다.",
-        },
-      },
-    ],
   };
+
 
   const promises = json.words.map(async (word) => {
     const res = await fetch(`${process.env.APP_URL}/api/word`, {

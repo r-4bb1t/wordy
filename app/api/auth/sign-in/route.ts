@@ -1,16 +1,14 @@
-import { db } from "@/app/lib/firebase/client";
+import { db } from "@/app/lib/firebase/admin";
 import { User } from "firebase/auth";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export async function POST(request: Request, response: Response) {
   const rawUserData: User = await request.json();
 
-  const collectionRef = collection(db, "user");
-  const docRef = doc(collectionRef, rawUserData.uid);
-  const docSnap = await getDoc(docRef);
+  const docRef = db.doc(`user/${rawUserData.uid}`);
+  const doc = await docRef.get();
 
-  if (docSnap.exists()) {
-    const response = Response.json(docSnap.data());
+  if (doc.exists) {
+    const response = Response.json(doc.data());
 
     return response;
   }
@@ -23,7 +21,7 @@ export async function POST(request: Request, response: Response) {
     provider: rawUserData.providerData[0].providerId,
   };
 
-  await setDoc(docRef, user);
+  docRef.set(user);
 
   return Response.json(user);
 }

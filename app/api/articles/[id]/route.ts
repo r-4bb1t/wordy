@@ -1,22 +1,15 @@
-import { db } from "@/app/lib/firebase/client";
+import { db } from "@/app/lib/firebase/admin";
 import { ArticleType } from "@/app/types/articles";
-import {
-  DocumentReference,
-  Timestamp,
-  doc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
+import { DocumentReference } from "firebase/firestore";
 import { NextRequest } from "next/server";
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const docRef = doc(db, "article", params.id);
-  const docSnap = await getDoc(docRef);
+  const doc = await db.doc("article/" + params.id).get();
 
-  if (docSnap.exists()) {
-    const article = docSnap.data();
+  if (doc.exists) {
+    const article = doc.data()!;
     const promises = article.words.map(async (wordRef: DocumentReference) =>
-      (await getDoc(wordRef)).data()
+      (await db.doc(wordRef.path).get()).data()
     );
     const words = await Promise.all(promises);
     return Response.json({
@@ -24,7 +17,7 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
         ...article,
         words,
         id: params.id,
-        createdAt: (article.createdAt as Timestamp).toDate(),
+        createdAt: new Date(article.createdAt),
       },
     });
   }
@@ -38,12 +31,12 @@ export async function PATCH(
 ) {
   const article: ArticleType = await request.json();
 
-  const docRef = doc(db, "article", params.id);
+  const doc = db.doc("article/" + params.id);
 
-  await setDoc(docRef, {
+  await doc.set({
     ...article,
-    words: article.words.map((word) => doc(db, "word/" + word.word)),
-    createdAt: Timestamp.now(),
+    words: article.words.map((word) => db.doc("word/" + word.word)),
+    createdAt: new Date((await doc.get()).data()?.createdAt || Date.now()),
   });
 
   return Response.json({ article });

@@ -1,18 +1,16 @@
-import { db } from "@/app/lib/firebase/client";
+import { db } from "@/app/lib/firebase/admin";
 import { WordType } from "@/app/types/result";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export async function POST(request: Request) {
   const word: WordType = await request.json();
 
-  const collectionRef = collection(db, "word");
-  const docRef = doc(collectionRef, word.word);
-  const docSnap = await getDoc(docRef);
+  const docRef = db.collection("word").doc(word.word);
+  const doc = await docRef.get();
 
-  if (docSnap.exists()) {
-    return Response.json(docSnap.data());
+  if (doc.exists) {
+    return Response.json(doc.data());
   }
 
-  await setDoc(docRef, word);
+  await docRef.set(word);
   return Response.json(word);
 }
