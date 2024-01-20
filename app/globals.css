@@ -92,10 +92,10 @@
   line-height: 1.8 !important;
 }
 
-/* .markdown-body a {
+.markdown-body a {
   color: inherit !important;
-  pointer-events: none !important;
-} */
+  font-weight: 600 !important;
+}
 
 .markdown-body-sm {
   font-size: 0.75rem !important;
