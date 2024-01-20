@@ -13,7 +13,12 @@ export const emphasize = (text: string, words: WordType[]) => {
   // find all the words in the text and append the tooltip
   const $ = load(t);
   words.forEach((word) => {
+    const firstLetterUpperCase =
+      word.word[0].toUpperCase() + word.word.slice(1);
     $(`span.highlight:contains(${word.word})`).each((i, elem) => {
+      $(elem).find(".ttip").text(word.meaning);
+    });
+    $(`span.highlight:contains(${firstLetterUpperCase})`).each((i, elem) => {
       $(elem).find(".ttip").text(word.meaning);
     });
   });
