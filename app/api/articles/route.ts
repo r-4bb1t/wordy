@@ -1,5 +1,6 @@
 import { db } from "@/app/lib/firebase/admin";
 import { ArticleType } from "@/app/types/articles";
+import { Timestamp } from "firebase/firestore";
 
 export async function GET(request: Request) {
   const articles = await db
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
       return {
         ...article,
         id: doc.id,
-        createdAt: new Date(article.createdAt),
+        createdAt: (article.createdAt as Timestamp).toDate(),
       };
     }),
   });

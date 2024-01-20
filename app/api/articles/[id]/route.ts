@@ -18,7 +18,6 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
         ...article,
         words,
         id: params.id,
-        createdAt: new Date(article.createdAt),
       },
     });
   }
