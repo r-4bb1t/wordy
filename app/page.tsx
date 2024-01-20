@@ -17,7 +17,7 @@ export default async function Home() {
 
   return (
     <div className="w-full h-full flex flex-col items-center px-6 md:px-12">
-      <ul className="w-full py-2 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
+      <ul className="w-full pt-2 pb-12 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {articles.map((article, i) => (
           <li className="w-full" key={i}>
             <ArticleCard article={article} />

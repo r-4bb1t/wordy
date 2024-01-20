@@ -1,11 +1,9 @@
 import OpenAI from "openai";
 import { PROMPT, ResponseType } from "./prompt";
-import { cookies } from "next/headers";
-import { WordType } from "@/app/types/result";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function POST (request: Request) {
+export async function POST(request: Request) {
   const { article } = await request.json();
 
   const completion = await openai.chat.completions.create({
@@ -19,15 +17,15 @@ export async function POST (request: Request) {
         content: `"""\n` + article + `\n"""`,
       },
     ],
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
   });
 
   const answer = completion.choices.map((choice) => choice.message.content);
+  console.log(answer);
   const json: ResponseType = JSON.parse(answer[0] || "null") || {
     words: [],
     quizzes: [],
   };
-
 
   const promises = json.words.map(async (word) => {
     const res = await fetch(`${process.env.APP_URL}/api/word`, {

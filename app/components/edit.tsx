@@ -62,7 +62,7 @@ export default function Edit({
           >
             {loading ? (
               <>
-                <div className="loading loading-spinner" />
+                <div className="loading loading-spinner loading-sm" />
                 저장
               </>
             ) : (
