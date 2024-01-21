@@ -46,6 +46,20 @@ export async function PATCH(
 
   const doc = db.doc("article/" + params.id);
 
+  const userId = decodeToken(
+    (request.headers.get("authorization") as string)?.split(" ")[1]
+  )?.userId;
+  const userData = userId
+    ? (await db.doc(`user/${userId}`).get()).data()
+    : null;
+
+  if (!userData) {
+    return Response.json({ error: "User not found" });
+  }
+  if (userData.role !== "admin") {
+    return Response.json({ error: "User is not admin" });
+  }
+
   await doc.set({
     ...article,
     words: article.words.map((word) => db.doc("word/" + word.word)),

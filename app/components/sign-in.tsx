@@ -18,7 +18,7 @@ export default function SignIn({ close }: { close: () => void }) {
       }
       setError("Failed to sign in");
     },
-    [close, setError]
+    [close, setError, setUser]
   );
 
   return (
