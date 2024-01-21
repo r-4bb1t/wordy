@@ -87,17 +87,6 @@ export default function Input({
         </div>
       </div>
       <div className="w-full">
-        <h1 className="text-lg font-bold mb-2">Cover Image URL</h1>
-        <input
-          className="input w-full input-primary"
-          placeholder="image"
-          value={article.image}
-          onChange={(e) =>
-            setArticle((article) => ({ ...article, image: e.target.value }))
-          }
-        />
-      </div>
-      <div className="w-full">
         <h1 className="text-lg font-bold mb-2">Author & Original URL</h1>
         <div className="grid grid-cols-[1fr_2fr] gap-4">
           <input
@@ -117,6 +106,17 @@ export default function Input({
             }
           />
         </div>
+      </div>
+      <div className="w-full">
+        <h1 className="text-lg font-bold mb-2">Cover Image URL</h1>
+        <input
+          className="input w-full input-primary"
+          placeholder="image"
+          value={article.image}
+          onChange={(e) =>
+            setArticle((article) => ({ ...article, image: e.target.value }))
+          }
+        />
       </div>
       <div className="w-full h-64 overflow-hidden border-primary border">
         <img
