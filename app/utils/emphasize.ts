@@ -11,7 +11,6 @@ export const emphasize = (text: string, words: WordType[]) => {
     return `<span class="highlight"><span class="ttip">${match}</span>${match}</span>`;
   });
 
-  // find all the words in the text and append the tooltip
   const $ = load(t);
   words.forEach((word) => {
     const firstLetterUpperCase =

@@ -14,7 +14,7 @@ export default async function Header() {
     <header className="fixed top-0 w-screen inset-x-0 flex items-center h-16 justify-between px-6 md:px-12 z-10 print:hidden">
       <Link
         href={"/"}
-        className="px-4 py-2 hover:bg-base-200 transition-colors normal-case text-lg font-black"
+        className="px-4 py-2 hover:bg-base-200 transition-colors normal-case text-lg font-black rounded-lg"
       >
         wordy
       </Link>

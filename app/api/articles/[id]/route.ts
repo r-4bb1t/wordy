@@ -22,19 +22,29 @@ export async function GET(
 
   if (doc.exists) {
     const article = doc.data()!;
-    const promises = article.words.map(async (wordRef: DocumentReference) => {
-      const wordDocRef = db.doc(wordRef.path);
-      const word = (await wordDocRef.get()).data();
-      return {
-        ...word,
-        isLiked: (userData?.words.includes(wordRef.id) as boolean) || false,
-      };
-    });
+    const promises = (article.words as DocumentReference[]).map(
+      async (wordRef) => {
+        const wordDocRef = db.doc(wordRef.path);
+        const word = (await wordDocRef.get()).data();
+        if (!word) {
+          docRef.update({
+            words: (article.words as DocumentReference[]).filter(
+              (w) => w.id !== wordRef.id
+            ),
+          });
+          return;
+        }
+        return {
+          ...word,
+          isLiked: (userData?.words.includes(wordRef.id) as boolean) || false,
+        };
+      }
+    );
     const words = await Promise.all(promises);
     return Response.json({
       article: {
         ...article,
-        words,
+        words: words.filter((word) => word),
         id: params.id,
       },
     });

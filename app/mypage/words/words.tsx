@@ -68,7 +68,7 @@ export default function Words({ words }: { words: WordType[] }) {
                   className="flex flex-col gap-2 p-2 rounded-xl group hover:bg-base-200 transition-colors"
                   key={`${article.title}-${i}`}
                 >
-                  <div className="rounded-xl overflow-hidden w-full h-24">
+                  <div className="rounded-xl overflow-hidden w-full h-16">
                     <img
                       src={article.image}
                       alt={article.title}
