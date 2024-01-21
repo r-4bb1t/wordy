@@ -60,7 +60,7 @@ const Word = ({
     <li>
       <div className="flex flex-col break-inside-avoid divide-y cursor-pointer md:cursor-auto">
         <div className="flex justify-between w-full px-4 py-2 items-center gap-4">
-          <div
+          <label
             className="hover:scale-110 transition-transform swap"
             onClick={() => {
               if (!user) {
@@ -81,7 +81,7 @@ const Word = ({
             />
             <IoHeart size={20} className="fill-primary swap-on" />
             <IoHeartOutline size={20} className="fill-primary swap-off" />
-          </div>
+          </label>
           <div
             className="w-full font-black text-primary text-base flex flex-col md:flex-row md:gap-4"
             onClick={() => setIsOpened((s) => !s)}
