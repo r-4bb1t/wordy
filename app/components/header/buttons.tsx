@@ -22,7 +22,7 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [setUser]);
 
   return (
     <div className="flex items-center gap-4">

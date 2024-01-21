@@ -2,10 +2,9 @@ import { db } from "@/app/lib/firebase/admin";
 import { cookies } from "next/headers";
 
 export async function POST(
-  request: Request,
+  _: Request,
   { params }: { params: { word: string } }
 ) {
-  const { isLiked } = await request.json();
   const userId = cookies().get("wordy-user")?.value;
 
   if (!userId) {
@@ -21,10 +20,10 @@ export async function POST(
 
   userRef.set({
     ...userDoc,
-    words: isLiked
+    words: userDoc.words.includes(params.word)
       ? userDoc.words.filter((word: string) => word !== params.word)
       : [...userDoc.words, params.word],
   });
 
-  return Response.json({ isLiked: !isLiked });
+  return Response.json({ isLiked: !userDoc.words.includes(params.word) });
 }

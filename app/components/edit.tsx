@@ -21,11 +21,11 @@ export default function Edit({
   const router = useRouter();
 
   const handleSave = useCallback(async () => {
-    setLoading(true);
     if (!user) {
       alert("로그인이 필요합니다.");
       return;
     }
+    setLoading(true);
     try {
       if (defaultArticle.id) {
         const result = await fetch(`/api/articles/${defaultArticle.id}`, {
@@ -60,31 +60,29 @@ export default function Edit({
     } finally {
       setLoading(false);
     }
-  }, [article, defaultArticle.id, router]);
+  }, [article, defaultArticle.id, router, user, token]);
 
   return (
     <main className="flex flex-col items-center w-full gap-8 px-4 py-12 md:py-20">
       <Input article={article} setArticle={setArticle} />
 
-      {article.words.length > 0 && (
-        <div className="w-full flex flex-col items-center gap-8">
-          <Result article={article} setArticle={setArticle} />
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSave()}
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <div className="loading loading-spinner loading-sm" />
-                저장
-              </>
-            ) : (
-              "저장"
-            )}
-          </button>
-        </div>
-      )}
+      <div className="w-full flex flex-col items-center gap-8">
+        <Result article={article} setArticle={setArticle} />
+        <button
+          className="btn btn-primary"
+          onClick={() => handleSave()}
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <div className="loading loading-spinner loading-sm" />
+              저장
+            </>
+          ) : (
+            "저장"
+          )}
+        </button>
+      </div>
     </main>
   );
 }

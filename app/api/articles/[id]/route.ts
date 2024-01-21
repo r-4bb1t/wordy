@@ -65,13 +65,13 @@ export async function PATCH(
     return Response.json({ error: "User is not admin" });
   }
 
-  Promise.all(
+  await Promise.all(
     article.words.map(async (word: WordType) => {
       const wordRef = db.doc(`word/${word.word}`);
       const w = (await wordRef.get()).data();
       if (w) {
         return await wordRef.update({
-          articles: [...w.articles, article.id],
+          articles: [...(w.articles ?? []), db.doc(`article/${params.id}`)],
         });
       }
       return;

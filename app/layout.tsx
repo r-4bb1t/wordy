@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 export const metadata: Metadata = {
   title: "wordy",
   description: "영어 아티클을 학습지로 변환해주는 서비스입니다.",
+  metadataBase: new URL("https://wordy.r4bb1t.dev"),
   openGraph: {
     images: [
       {

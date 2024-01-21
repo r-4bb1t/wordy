@@ -5,7 +5,6 @@ export async function GET(request: Request) {
   const words = (await db.collection("word").get()).docs.map(
     (w) => w.data().word
   );
-  console.log(words)
   const articles = await db.collection("article").get();
 
   const promises = articles.docs.map(async (doc) => {

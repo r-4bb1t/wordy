@@ -15,14 +15,14 @@ const getData = async (id: string) => {
       },
       cache: "no-cache",
     }).then((res) => res.json());
-    if (!result.article) return null;
+    if (!result.article) throw new Error("Article not found");
     return { article: result.article, token } as {
       article: ArticleType;
       token: string;
     };
   } catch (e) {
     console.log(e);
-    return {article:null,token:''};
+    return { article: null, token: "" };
   }
 };
 
@@ -33,7 +33,7 @@ export async function generateMetadata(
   const data = await getData(params.id);
 
   return {
-    title: data?.article.title,
+    title: data?.article?.title,
   };
 }
 

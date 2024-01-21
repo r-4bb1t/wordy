@@ -21,7 +21,6 @@ export async function POST(request: Request) {
   });
 
   const answer = completion.choices.map((choice) => choice.message.content);
-  console.log(answer);
   const json: ResponseType = JSON.parse(answer[0] || "null") || {
     words: [],
     quizzes: [],
