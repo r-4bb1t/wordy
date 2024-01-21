@@ -4,13 +4,19 @@ import { WordType } from "@/app/types/result";
 import Link from "next/link";
 import { IoChevronDown, IoHeart, IoHeartOutline } from "react-icons/io5";
 
-export default function Words({ words }: { words: WordType[] }) {
+export default function Words({
+  words,
+  token,
+}: {
+  words: WordType[];
+  token: string;
+}) {
   const handleLike = async (word: WordType) => {
     await fetch(`/api/word/${word.word}/like`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "include",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ isLiked: word.isLiked }),
     });

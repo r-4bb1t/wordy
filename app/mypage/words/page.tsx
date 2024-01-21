@@ -18,18 +18,18 @@ const getData = async () => {
     if (res.error) {
       throw new Error(res.error);
     }
-    return res.words as WordType[];
+    return { words: res.words, token } as { words: WordType[]; token: string };
   } catch (e) {
     redirect("/");
   }
 };
 
 export default async function Home() {
-  const words = await getData();
+  const { words, token } = await getData();
 
   return (
     <div className="w-full h-full flex flex-col items-center px-6 md:px-12">
-      <Words words={words} />
+      <Words words={words} token={token} />
     </div>
   );
 }
