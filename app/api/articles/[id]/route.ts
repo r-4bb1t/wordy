@@ -3,7 +3,6 @@ import { ArticleType } from "@/app/types/articles";
 import { WordType } from "@/app/types/result";
 import { decodeToken } from "@/app/utils/create-token";
 import { DocumentReference, Timestamp } from "firebase/firestore";
-import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
 export async function GET(
