@@ -10,6 +10,7 @@ import {
 } from "react-icons/io5";
 import { signOut } from "@/app/lib/firebase/client";
 import Link from "next/link";
+import { deleteCookie } from "./deleteCookie";
 
 const greet = () => {
   const hour = new Date().getHours();
@@ -20,6 +21,7 @@ const greet = () => {
 
 export default function UserButton({ user }: { user: UserType }) {
   const handleSignOut = async () => {
+    deleteCookie();
     await signOut();
   };
 
