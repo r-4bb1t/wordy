@@ -1,7 +1,7 @@
 import { db } from "@/app/lib/firebase/admin";
 import { ArticleType } from "@/app/types/articles";
 import { decodeToken } from "@/app/utils/create-token";
-import { DocumentReference } from "firebase/firestore";
+import { DocumentReference, Timestamp } from "firebase/firestore";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
@@ -49,7 +49,9 @@ export async function PATCH(
   await doc.set({
     ...article,
     words: article.words.map((word) => db.doc("word/" + word.word)),
-    createdAt: new Date((await doc.get()).data()?.createdAt || Date.now()),
+    createdAt: new Date(
+      ((await doc.get()).data()?.createdAt as Timestamp).toDate() || Date.now()
+    ),
   });
 
   return Response.json({ article });

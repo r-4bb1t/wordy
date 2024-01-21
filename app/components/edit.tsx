@@ -28,7 +28,7 @@ export default function Edit({
           body: JSON.stringify(article),
           cache: "no-store",
         });
-        router.replace(`/article/${defaultArticle.id}`);
+        router.push(`/article/${defaultArticle.id}`);
       } else {
         const result = await fetch(`/api/articles`, {
           method: "POST",

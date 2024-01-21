@@ -31,7 +31,7 @@ export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
         <UserButton user={user} />
       ) : (
         <button
-          className="btn btn-ghost normal-case font-black"
+          className="px-4 py-2 hover:bg-base-200 transition-colors normal-case font-black"
           onClick={() => setIsOpenedSignIn(true)}
         >
           Login
