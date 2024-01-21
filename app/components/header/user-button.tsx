@@ -66,14 +66,14 @@ export default function UserButton({ user }: { user: UserType }) {
         <li className="grid grid-cols-2 gap-2 divide-x">
           <Link
             href={"/mypage/words"}
-            className="px-4 py-2 hover:bg-base-200 transition-colors btn-sm w-full rounded-lg h-auto flex flex-col py-2"
+            className="px-4 py-2 hover:bg-base-300 transition-colors w-full rounded-lg flex flex-col items-center font-semibold gap-2"
           >
             <IoListOutline size={24} />
             <div className="text-xs">단어장</div>
           </Link>
           <Link
             href={"/mypage/articles"}
-            className="px-4 py-2 hover:bg-base-200 transition-colors btn-sm w-full rounded-lg h-auto flex flex-col py-2"
+            className="px-4 py-2 hover:bg-base-300 transition-colors w-full rounded-lg flex flex-col items-center font-semibold gap-2"
           >
             <IoNewspaperOutline size={24} />
             <div className="text-xs">내 기사</div>
@@ -82,7 +82,7 @@ export default function UserButton({ user }: { user: UserType }) {
         <hr />
         <li>
           <button
-            className="px-4 py-2 hover:bg-base-200 transition-colors btn-sm w-full rounded-lg"
+            className="px-4 py-2 hover:bg-base-300 transition-colors w-full rounded-lg text-sm flex items-center justify-between"
             onClick={() => handleSignOut()}
           >
             Sign Out

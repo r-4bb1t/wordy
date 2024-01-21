@@ -1,5 +1,10 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
-import { GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 export const firebaseConfig = {
@@ -19,9 +24,10 @@ export const auth = getAuth(app);
 
 const providers = {
   github: new GithubAuthProvider(),
+  google: new GoogleAuthProvider(),
 };
 
-export const signIn = async (provider: "github") => {
+export const signIn = async (provider: "github" | "google") => {
   const rawUserData = (await signInWithPopup(auth, providers[provider])).user;
   if (!rawUserData) {
     throw new Error("No user data returned");
