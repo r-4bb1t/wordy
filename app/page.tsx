@@ -3,6 +3,7 @@ import ArticleCard from "./article-card";
 
 const getData = async () => {
   try {
+    await fetch(`${process.env.APP_URL}/api/migrate`);
     const { articles } = await fetch(`${process.env.APP_URL}/api/articles`, {
       cache: "no-store",
     }).then((res) => res.json());

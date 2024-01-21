@@ -11,6 +11,7 @@ export async function GET(
 ) {
   const docRef = db.doc(`article/${params.id}`);
   const doc = await docRef.get();
+
   const userId = decodeToken(
     (request.headers.get("authorization") as string).split(" ")[1]
   )?.userId;

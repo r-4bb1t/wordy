@@ -34,7 +34,10 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
         credentials: "include",
       },
-      body: JSON.stringify(word),
+      body: JSON.stringify({
+        ...word,
+        exampleSentence: [word.exampleSentence],
+      }),
       cache: "no-store",
     });
     const json = await res.json();
