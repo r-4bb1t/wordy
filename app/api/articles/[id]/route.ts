@@ -62,7 +62,12 @@ export async function PATCH(
 
   await doc.set({
     ...article,
-    words: article.words.map((word) => db.doc("word/" + word.word)),
+    words: article.words
+      .map((word) => db.doc("word/" + word.word))
+      .filter(
+        (word, index, self) =>
+          self.findIndex((w) => w.path === word.path) === index
+      ),
     createdAt: new Date(
       ((await doc.get()).data()?.createdAt as Timestamp).toDate() || Date.now()
     ),

@@ -40,7 +40,12 @@ export async function POST(request: Request) {
 
   const newDoc = await db.collection("article").add({
     ...article,
-    words: article.words.map((word) => db.doc(`word/${word.word}`)),
+    words: article.words
+      .map((word) => db.doc(`word/${word.word}`))
+      .filter(
+        (word, index, self) =>
+          self.findIndex((w) => w.path === word.path) === index
+      ),
     createdAt: new Date(),
   });
 
