@@ -5,13 +5,14 @@ import Input from "./input";
 import { useCallback, useState } from "react";
 import { ArticleType } from "../types/articles";
 import { useRouter } from "next/navigation";
-import { createToken } from "../utils/create-token";
 import { useUserStore } from "../store/user-store";
 
 export default function Edit({
   defaultArticle,
+  token,
 }: {
   defaultArticle: ArticleType;
+  token: string;
 }) {
   const [article, setArticle] = useState<ArticleType>(defaultArticle);
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ export default function Edit({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${createToken(user!.id)}`,
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(article),
           cache: "no-store",
@@ -43,7 +44,7 @@ export default function Edit({
         const result = await fetch(`/api/articles`, {
           method: "POST",
           headers: {
-            authorization: `Bearer ${createToken(user!.id)}`,
+            authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(article),

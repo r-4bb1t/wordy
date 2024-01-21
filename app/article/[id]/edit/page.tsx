@@ -16,10 +16,13 @@ const getData = async (id: string) => {
       cache: "no-cache",
     }).then((res) => res.json());
     if (!result.article) return null;
-    return result.article as ArticleType;
+    return { article: result.article, token } as {
+      article: ArticleType;
+      token: string;
+    };
   } catch (e) {
     console.log(e);
-    return null;
+    return {article:null,token:''};
   }
 };
 
@@ -30,12 +33,12 @@ export async function generateMetadata(
   const data = await getData(params.id);
 
   return {
-    title: data?.title,
+    title: data?.article.title,
   };
 }
 
 export default async function Article({ params }: { params: { id: string } }) {
-  const article = await getData(params.id);
+  const { article, token } = await getData(params.id);
   if (!article) throw new Error("Article not found");
-  return <Edit defaultArticle={article} />;
+  return <Edit defaultArticle={article} token={token} />;
 }

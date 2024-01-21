@@ -1,5 +1,6 @@
 import { db } from "@/app/lib/firebase/admin";
 import { ArticleType } from "@/app/types/articles";
+import { WordType } from "@/app/types/result";
 import { decodeToken } from "@/app/utils/create-token";
 import { DocumentReference, Timestamp } from "firebase/firestore";
 import { cookies } from "next/headers";
@@ -22,7 +23,8 @@ export async function GET(
   if (doc.exists) {
     const article = doc.data()!;
     const promises = article.words.map(async (wordRef: DocumentReference) => {
-      const word = (await db.doc(wordRef.path).get()).data();
+      const wordDocRef = db.doc(wordRef.path);
+      const word = (await wordDocRef.get()).data();
       return {
         ...word,
         isLiked: (userData?.words.includes(wordRef.id) as boolean) || false,
@@ -62,6 +64,19 @@ export async function PATCH(
   if (userData.role !== "admin") {
     return Response.json({ error: "User is not admin" });
   }
+
+  Promise.all(
+    article.words.map(async (word: WordType) => {
+      const wordRef = db.doc(`word/${word.word}`);
+      const w = (await wordRef.get()).data();
+      if (w) {
+        return await wordRef.update({
+          articles: [...w.articles, article.id],
+        });
+      }
+      return;
+    })
+  );
 
   await doc.set({
     ...article,
