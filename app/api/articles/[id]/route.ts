@@ -21,10 +21,13 @@ export async function GET(
 
   if (doc.exists) {
     const article = doc.data()!;
-    const promises = article.words.map(async (wordRef: DocumentReference) => ({
-      ...(await db.doc(wordRef.path).get()).data(),
-      isLiked: (userData?.words.includes(wordRef.id) as boolean) || false,
-    }));
+    const promises = article.words.map(async (wordRef: DocumentReference) => {
+      const word = (await db.doc(wordRef.path).get()).data();
+      return {
+        ...word,
+        isLiked: (userData?.words.includes(wordRef.id) as boolean) || false,
+      };
+    });
     const words = await Promise.all(promises);
     return Response.json({
       article: {
