@@ -2,7 +2,7 @@ import { DocumentReference } from "firebase/firestore";
 import { db } from "../../lib/firebase/admin";
 
 export async function GET(request: Request) {
-  const words = (await db.collection("word").get()).docs.map(
+  /*  const words = (await db.collection("word").get()).docs.map(
     (w) => w.data().word
   );
   const articles = await db.collection("article").get();
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   });
 
   await Promise.all(promises);
-
+ */
   console.log("migration done");
   return Response.json({ message: "done" });
 }
