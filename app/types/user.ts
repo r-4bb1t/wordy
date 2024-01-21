@@ -5,4 +5,5 @@ export interface UserType {
   image: string | null;
   provider: string;
   role: string;
+  words: string[];
 }

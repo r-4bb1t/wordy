@@ -20,13 +20,15 @@ export type CategoryType =
   | "business"
   | "science"
   | "sports"
-  | "entertainment";
+  | "entertainment"
+  | "art";
 
-  export const CATEGORY_LIST: CategoryType[] = [
-    "tech",
-    "health",
-    "business",
-    "science",
-    "sports",
-    "entertainment",
-  ];
+export const CATEGORY_LIST: CategoryType[] = [
+  "tech",
+  "health",
+  "business",
+  "science",
+  "sports",
+  "entertainment",
+  "art",
+];

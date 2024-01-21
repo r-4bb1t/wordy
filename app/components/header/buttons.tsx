@@ -4,12 +4,25 @@ import SignIn from "../sign-in";
 import Modal from "../modal";
 import Darkmode from "./darkmode";
 import { useUserStore } from "@/app/store/user-store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserButton from "./user-button";
+import { auth } from "@/app/lib/firebase/client";
+import { convertUserType } from "@/app/utils/convert-user-type";
 
 export default function HeaderButtons({ theme }: { theme: "light" | "dark" }) {
   const [isOpenedSignIn, setIsOpenedSignIn] = useState(false);
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((rawUserData) => {
+      if (rawUserData) {
+        setUser(convertUserType(rawUserData));
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="flex items-center gap-4">

@@ -5,6 +5,7 @@ export interface WordType {
     sentence: string;
     meaning: string;
   };
+  isLiked: boolean;
 }
 
 export interface QuizType {

@@ -1,10 +1,18 @@
 import View from "@/app/article/[id]/view";
 import { ArticleType } from "@/app/types/articles";
+import { createToken } from "@/app/utils/create-token";
 import { Metadata, ResolvingMetadata } from "next";
+import { cookies } from "next/headers";
 
 const getData = async (id: string) => {
   try {
+    const userId = cookies().get("wordy-user")?.value || "";
+    const token = createToken(userId);
     const result = await fetch(`${process.env.APP_URL}/api/articles/${id}`, {
+      headers: {
+        credentials: "include",
+        authorization: `Bearer ${token}`,
+      },
       cache: "no-cache",
     }).then((res) => res.json());
     if (!result.article) return null;

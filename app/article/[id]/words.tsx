@@ -1,17 +1,39 @@
+"use client";
+
 import { WordType } from "@/app/types/result";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { IoChevronDown } from "react-icons/io5";
+import { IoChevronDown, IoHeart, IoHeartOutline } from "react-icons/io5";
 
 export default function Words({ words }: { words: WordType[] }) {
+  const handleLike = async (word: WordType) => {
+    await fetch(`/api/word/${word.word}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include",
+      },
+      body: JSON.stringify({ isLiked: word.isLiked }),
+    });
+  };
+
   return (
     <ul className="w-full text-sm bg-base-100 grid md:grid-cols-2">
       {words.map((word, i) => (
         <li key={i}>
-          <label className="flex flex-col break-inside-avoid divide-y cursor-pointer">
+          <label className="flex flex-col break-inside-avoid divide-y cursor-pointer md:cursor-auto">
             <div className="flex justify-between w-full px-4 py-2 items-center gap-4">
-              <div>
-                <IoMdHeartEmpty size={20} className="fill-primary" />
-              </div>
+              <label className="hover:scale-110 transition-transform swap">
+                <input
+                  type="checkbox"
+                  className="hidden"
+                  id={`word-${i}`}
+                  defaultChecked={word.isLiked}
+                  onChange={() => {
+                    handleLike(word);
+                  }}
+                />
+                <IoHeart size={20} className="fill-primary swap-on" />
+                <IoHeartOutline size={20} className="fill-primary swap-off" />
+              </label>
               <div className="w-full font-black text-primary text-base flex flex-col md:flex-row md:gap-4">
                 <div>{word.word}</div>
                 <div className="font-medium text-base">
