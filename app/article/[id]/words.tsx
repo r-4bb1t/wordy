@@ -99,6 +99,7 @@ const Word = ({
               "md:hidden transition-transform",
               isOpened && "rotate-180",
             ])}
+            onClick={() => setIsOpened((s) => !s)}
           >
             <IoChevronDown />
           </div>
