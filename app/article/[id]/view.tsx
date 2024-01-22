@@ -1,6 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
 import { ArticleType } from "../../types/articles";
 import "github-markdown-css";
 import { emphasize } from "../../utils/emphasize";
