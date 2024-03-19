@@ -61,7 +61,12 @@ export default function ExampleSentence({
     update((word) => ({
       ...word,
       exampleSentence: word.exampleSentence.map((e, i) =>
-        i === index ? example : e
+        i === index
+          ? {
+              sentence,
+              meaning,
+            }
+          : e
       ),
     }));
     setIsEditing(false);
