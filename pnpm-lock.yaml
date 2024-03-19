@@ -5,12 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/autosize':
+    specifier: ^4.0.3
+    version: 4.0.3
   '@types/showdown':
     specifier: ^2.0.6
     version: 2.0.6
   '@uiw/react-md-editor':
     specifier: 4.0.1
     version: 4.0.1(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
+  autosize:
+    specifier: ^6.0.1
+    version: 6.0.1
   cheerio:
     specifier: 1.0.0-rc.12
     version: 1.0.0-rc.12
@@ -934,6 +940,10 @@ packages:
     dev: false
     optional: true
 
+  /@types/autosize@4.0.3:
+    resolution: {integrity: sha512-o0ZyU3ePp3+KRbhHsY4ogjc+ZQWgVN5h6j8BHW5RII4cFKi6PEKK9QPAcphJVkD0dGpyFnD3VRR0WMvHVjCv9w==}
+    dev: false
+
   /@types/blob-stream@0.1.33:
     resolution: {integrity: sha512-HNHZ1S6W7F8PhxdyAastunpUC8cAZim78UIfqbL79gLzylp8EZep68yxAh11hTRoEvsqHAg/MECgmKF8+V0HzQ==}
     dependencies:
@@ -1460,6 +1470,10 @@ packages:
       postcss: 8.4.32
       postcss-value-parser: 4.2.0
     dev: true
+
+  /autosize@6.0.1:
+    resolution: {integrity: sha512-f86EjiUKE6Xvczc4ioP1JBlWG7FKrE13qe/DxBCpe8GCipCq2nFw73aO8QEBKHfSbYGDN5eB9jXWKen7tspDqQ==}
+    dev: false
 
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}

@@ -16,12 +16,21 @@ export async function POST(request: Request) {
     : null;
 
   if (wordDoc.exists) {
-    await wordDocRef.update({
-      exampleSentence: [
-        ...wordDoc.data()?.exampleSentence,
-        ...word.exampleSentence,
-      ],
-    });
+    if (
+      !wordDoc
+        .data()
+        ?.exampleSentence.some(
+          (sentence: { sentence: string }) =>
+            sentence.sentence === word.exampleSentence[0].sentence
+        )
+    ) {
+      await wordDocRef.update({
+        exampleSentence: [
+          ...wordDoc.data()?.exampleSentence,
+          ...word.exampleSentence,
+        ],
+      });
+    }
     return Response.json({
       ...wordDoc.data(),
       isLiked: (userData?.words.includes(wordDoc.id) as boolean) || false,

@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/autosize": "^4.0.3",
     "@types/showdown": "^2.0.6",
     "@uiw/react-md-editor": "4.0.1",
+    "autosize": "^6.0.1",
     "cheerio": "1.0.0-rc.12",
     "classcat": "^5.0.4",
     "daisyui": "^3.9.4",

@@ -1,13 +1,14 @@
 "use client";
 
 import { ArticleType } from "../../types/articles";
-import "github-markdown-css";
 import { emphasize } from "../../utils/emphasize";
 import Showdown from "showdown";
 import Quizzes from "./quizzes";
 import Words from "./words";
 import { IoIosLink } from "react-icons/io";
 import Link from "next/link";
+
+import "github-markdown-css";
 
 export default function View({ article }: { article: ArticleType }) {
   const { title, en, ko, words, quizzes, author, url } = article;

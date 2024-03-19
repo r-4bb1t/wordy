@@ -8,6 +8,7 @@ import { UserType } from "@/app/types/user";
 import { Dispatch, useState } from "react";
 import { IoChevronDown, IoHeart, IoHeartOutline } from "react-icons/io5";
 import cc from "classcat";
+import ExampleSentence from "./example-sentence";
 
 export default function Words({ words }: { words: WordType[] }) {
   const { user } = useUserStore();
@@ -45,7 +46,7 @@ export default function Words({ words }: { words: WordType[] }) {
 }
 
 const Word = ({
-  word,
+  word: defaultWord,
   user,
   setIsOpenedSignIn,
   handleLike,
@@ -56,6 +57,8 @@ const Word = ({
   handleLike: (word: WordType) => void;
 }) => {
   const [isOpened, setIsOpened] = useState(false);
+  const [word, setWord] = useState<WordType>(defaultWord);
+
   return (
     <li>
       <div className="flex flex-col break-inside-avoid divide-y cursor-pointer md:cursor-auto">
@@ -111,10 +114,13 @@ const Word = ({
           ])}
         >
           {word.exampleSentence.map((e, i) => (
-            <div className="flex flex-col gap-1 py-3 px-4" key={i}>
-              <div className="font-medium">{e.sentence}</div>
-              <div className="opacity-80">{e.meaning}</div>
-            </div>
+            <ExampleSentence
+              word={defaultWord.word}
+              index={i}
+              example={e}
+              key={i}
+              update={setWord}
+            />
           ))}
         </div>
       </div>

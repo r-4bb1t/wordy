@@ -14,9 +14,11 @@ export default function Input({
   article: ArticleType;
   setArticle: React.Dispatch<React.SetStateAction<ArticleType>>;
 }) {
-  const [loading, setLoading] = useState(false);
+  const [translateLoading, setTranslateLoading] = useState(false);
+  const [makeWordsLoading, setMakeWordsLoading] = useState(false);
 
   const translate = useCallback(async () => {
+    setTranslateLoading(true);
     const translateResult = await fetch("/api/translate", {
       method: "POST",
       headers: {
@@ -28,9 +30,11 @@ export default function Input({
     });
     const { message } = await translateResult.json();
     setArticle((article) => ({ ...article, ko: message }));
+    setTranslateLoading(false);
   }, [article, setArticle]);
 
   const makeWords = useCallback(async () => {
+    setMakeWordsLoading(true);
     const wordsResult = await fetch("/api/openai", {
       method: "POST",
       headers: {
@@ -42,18 +46,8 @@ export default function Input({
     });
     const { words, quizzes } = await wordsResult.json();
     setArticle((article) => ({ ...article, words, quizzes }));
+    setMakeWordsLoading(false);
   }, [article, setArticle]);
-
-  const makeResult = useCallback(async () => {
-    setLoading(true);
-    try {
-      await Promise.all([translate(), makeWords()]);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  }, [makeWords, translate]);
 
   return (
     <div className="w-full flex flex-col max-w-5xl items-center gap-4">
@@ -138,13 +132,30 @@ export default function Input({
           className="w-full text-sm"
         />
       </div>
-      <button
-        onClick={() => makeResult()}
-        className="btn btn-primary"
-        disabled={loading}
-      >
-        {loading ? <div className="loading loading-dots" /> : "Make!"}
-      </button>
+      <div className="flex gap-2">
+        <button
+          onClick={() => translate()}
+          className="btn btn-primary"
+          disabled={translateLoading}
+        >
+          {translateLoading ? (
+            <div className="loading loading-dots" />
+          ) : (
+            "Translate"
+          )}
+        </button>
+        <button
+          onClick={() => makeWords()}
+          className="btn btn-primary"
+          disabled={makeWordsLoading}
+        >
+          {makeWordsLoading ? (
+            <div className="loading loading-dots" />
+          ) : (
+            "Make Words"
+          )}
+        </button>
+      </div>
     </div>
   );
 }

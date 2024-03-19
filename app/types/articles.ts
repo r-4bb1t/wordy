@@ -21,7 +21,8 @@ export type CategoryType =
   | "science"
   | "sports"
   | "entertainment"
-  | "art";
+  | "art"
+  | "culture";
 
 export const CATEGORY_LIST: CategoryType[] = [
   "tech",
@@ -31,4 +32,5 @@ export const CATEGORY_LIST: CategoryType[] = [
   "sports",
   "entertainment",
   "art",
+  "culture",
 ];

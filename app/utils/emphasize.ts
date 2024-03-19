@@ -1,7 +1,7 @@
 import { WordType } from "../types/result";
 import { load } from "cheerio";
 
-export const emphasize = (text: string, words: WordType[]) => {
+export const emphasize = (text: string, words: WordType[]): string => {
   const wordRegex = new RegExp(
     `(?<!\\[.*?)(${words.map((word) => word.word).join("|")})(?!.*?\\])`,
     "gi"
