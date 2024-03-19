@@ -28,7 +28,7 @@ export async function PATCH(
     return Response.json({ error: "Word not found" });
   }
 
-  wordRef.update({
+  await wordRef.update({
     exampleSentence: wordDoc.exampleSentence.map(
       (s: { meaning: string; sentence: string }, i: number) => {
         if (i === sentenceIndex) {

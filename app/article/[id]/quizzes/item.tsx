@@ -41,7 +41,7 @@ export default function Item({ quiz }: { quiz: QuizType }) {
         <button
           className="btn btn-primary btn-xs"
           onClick={() => setSolved(true)}
-          disabled={solved || !selected}
+          disabled={solved || selected === null}
         >
           Submit
         </button>
