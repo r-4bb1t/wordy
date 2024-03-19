@@ -14,6 +14,22 @@ export default function ExampleSentence({
   example: { sentence: string; meaning: string };
   update: Dispatch<SetStateAction<WordType>>;
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [sentence, setSentence] = useState(example.sentence);
+  const [meaning, setMeaning] = useState(example.meaning);
+
+  const sentenceRef = useRef<HTMLTextAreaElement>(null);
+  const meaningRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (sentenceRef.current) {
+      autosize(sentenceRef.current);
+    }
+    if (meaningRef.current) {
+      autosize(meaningRef.current);
+    }
+  }, [sentenceRef.current, meaningRef.current]);
+
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this sentence?")) {
       await fetch(`/api/word/${word}/${index}`, {
@@ -29,6 +45,7 @@ export default function ExampleSentence({
       exampleSentence: word.exampleSentence.filter((_, i) => i !== index),
     }));
   };
+
   const handleEdit = async () => {
     await fetch(`/api/word/${word}/${index}`, {
       method: "PATCH",
@@ -47,23 +64,8 @@ export default function ExampleSentence({
         i === index ? example : e
       ),
     }));
+    setIsEditing(false);
   };
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [sentence, setSentence] = useState(example.sentence);
-  const [meaning, setMeaning] = useState(example.meaning);
-
-  const sentenceRef = useRef<HTMLTextAreaElement>(null);
-  const meaningRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    if (sentenceRef.current) {
-      autosize(sentenceRef.current);
-    }
-    if (meaningRef.current) {
-      autosize(meaningRef.current);
-    }
-  }, [sentenceRef.current, meaningRef.current]);
 
   return (
     <div className="flex flex-col gap-1 py-3 px-4">
