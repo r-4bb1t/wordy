@@ -37,6 +37,13 @@ export default async function RootLayout({
       data-theme={theme === "light" ? "lofi" : "ifol"}
       data-color-mode={theme}
     >
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6832330944407417"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body className="h-[100dvh] overflow-y-hidden pt-16 flex flex-col bg-base-100 text-base-content transition-colors">
         <Header />
         <div className="overflow-y-auto h-full">{children}</div>
